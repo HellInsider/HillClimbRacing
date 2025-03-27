@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class FuelUI : MonoBehaviour
 {
-    public Oil carFuelSystem; 
+    public Car carFuelSystem; 
     public Slider fuelSlider; 
 
     void Update()

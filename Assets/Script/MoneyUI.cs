@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MoneyUI : MonoBehaviour
 {
-    public MoneySystem moneySystem; 
+    public Car moneySystem; 
     public TextMeshProUGUI moneyText; 
 
     void Update()

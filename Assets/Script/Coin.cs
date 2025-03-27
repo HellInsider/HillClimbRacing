@@ -3,7 +3,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public int coinValue = 10; 
-    public MoneySystem moneySystem; 
+    public Car moneySystem; 
 
     void OnTriggerEnter2D(Collider2D collision)
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Refill : MonoBehaviour
 {
-    public Oil carFuelSystem; 
+    public Car carFuelSystem; 
 
     void OnTriggerEnter2D(Collider2D collision)
     {
