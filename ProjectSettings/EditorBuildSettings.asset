@@ -5,36 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/levels/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scene/menu 1.unity
-    guid: 827e0b88b9a614f4a82dc5ba52bcdaa8
-  - enabled: 1
-    path: Assets/Scene/Garage.unity
-    guid: a94b91414819d204fac86992a2d9cfec
-  - enabled: 1
-    path: Assets/levels/Desert.unity
-    guid: fbaca7d2e3de1de4d82f7a0ff7a6ed60
-  - enabled: 1
-    path: Assets/levels/Frozen Wastelland.unity
-    guid: a32dcdcd654e4dd40a426419c91d3e6d
-  - enabled: 1
-    path: Assets/levels/Mountains.unity
-    guid: df130d89c30df30469d03be29afccbc7
-  - enabled: 1
-    path: Assets/levels/Space.unity
-    guid: b003cc4a58bdf864d8650722483555b3
-  - enabled: 1
-    path: Assets/levels/Jungle.unity
-    guid: 0ba269480937763479bc3093080d857f
-  - enabled: 1
-    path: Assets/levels/City.unity
-    guid: 3b9080ab711d4844a8ffba725b20a2b2
-  - enabled: 1
-    path: Assets/levels/Beach.unity
-    guid: 8360344057af76e4ba48b952197c71be
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_UseUCBPForAssetBundles: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  m_configObjects: {}
