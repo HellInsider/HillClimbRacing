@@ -43,7 +43,7 @@ public class HeadDeath : MonoBehaviour
             groundLayer
         );
         if (collisions.Length > 0 && playerRigidbody != null &&
-            playerRigidbody.velocity.magnitude > minDeathSpeed)
+            playerRigidbody.linearVelocity.magnitude > minDeathSpeed)
         {
             StartCoroutine(ReloadLevel());
         }
@@ -62,7 +62,7 @@ public class HeadDeath : MonoBehaviour
 
         if (playerRigidbody != null)
         {
-            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.linearVelocity = Vector2.zero;
         }
 
         yield return new WaitForSeconds(1f);
