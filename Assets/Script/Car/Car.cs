@@ -14,6 +14,12 @@ public class Car : MonoBehaviour, ICar
     [SerializeField] public float _refillAmount;
     [SerializeField] float _NInputTorque;
     [SerializeField] float _PInputTorque;
+    [Header("Wheel")]
+    [SerializeField] private float _baseScale = 1f;
+    [SerializeField] private float _upgradeMultiplier = 1.2f;
+    [SerializeField] private int _maxUpgrades = 5;
+    [SerializeField] private bool _affectPhysics = true;
+    [SerializeField] private Transform[] _wheelVisuals;
     private int _currentMoney;
     private float _currentFuel;
     private bool _isOutOfFuel = false;
@@ -23,6 +29,8 @@ public class Car : MonoBehaviour, ICar
     private Rigidbody2D _rb;
     private float _moveInput;
     private bool _isMobileInput = false;
+    private int _currentUpgrades = 0;
+    private float _currentScale;
     public float engineForce => _engineForce;
     public float maxSpeed => _maxSpeed;
     public float rotationSpeed => _rotationSpeed;
@@ -44,12 +52,19 @@ public class Car : MonoBehaviour, ICar
     public float torqueInput => _torqueInput;
     public float NInputTorque => _NInputTorque;
     public float PInputTorque => _PInputTorque;
+    public float baseScale => _baseScale;
+    public float upgradeMultiplier => _upgradeMultiplier;
+    public int maxUpgrades  => _maxUpgrades;
+    public bool affectPhysics => _affectPhysics;
+    public int currentUpgrades => _currentUpgrades;
+    public float currentScale => _currentScale;
+    public Transform[] wheelVisuals => _wheelVisuals;
     void Start()
     {
         StartMoveCar();
         StartMoney();
         StartFuel();
-
+        StartWheel();
     }
     void Update()
     {
@@ -208,10 +223,74 @@ public class Car : MonoBehaviour, ICar
     }
     public int GetCurrentMoney()
     {
-        return currentMoney;
+        return _currentMoney;
     }
     public void UpdateMoneyUI()
     {
 
+    }
+    public void StartWheel()
+    {
+        _currentScale = baseScale;
+        ApplyWheelScale();
+    }
+
+    public void UpgradeWheels()
+    {
+        if (_currentUpgrades >= _maxUpgrades)
+        {
+            Debug.Log("Достигнут максимум улучшений колес!");
+            return;
+        }
+
+        _currentUpgrades++;
+        _currentScale *= _upgradeMultiplier;
+
+        ApplyWheelScale();
+        Debug.Log($"Улучшение колес (уровень {_currentUpgrades}/{_maxUpgrades})");
+    }
+
+    public void ApplyWheelScale()
+    {
+        foreach (var wheel in _wheelJoints)
+        {
+            if (wheel == null) continue;
+
+            Transform wheelTransform = wheel.transform;
+            wheelTransform.localScale = Vector3.one * _currentScale;
+
+            if (affectPhysics)
+            {
+                UpdateWheelPhysics(wheel);
+            }
+        }
+
+        if (_wheelVisuals != null)
+        {
+            foreach (var visual in _wheelVisuals)
+            {
+                if (visual == null) continue;
+                visual.localScale = Vector3.one * _currentScale;
+            }
+        }
+    }
+
+    public void UpdateWheelPhysics(WheelJoint2D wheel)
+    {
+        CircleCollider2D collider = wheel.GetComponent<CircleCollider2D>();
+        if (collider != null)
+        {
+            collider.radius = _baseScale * _currentScale * 0.5f;
+        }
+
+        JointSuspension2D suspension = wheel.suspension;
+        suspension.dampingRatio *= _currentScale / _baseScale;
+        wheel.suspension = suspension;
+    }
+    public void ResetUpgrades()
+    {
+        _currentUpgrades = 0;
+        _currentScale = _baseScale;
+        ApplyWheelScale();
     }
 }
