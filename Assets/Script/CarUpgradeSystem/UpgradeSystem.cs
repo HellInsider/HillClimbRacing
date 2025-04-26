@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public enum myEnum
 {
-    IncreasingTheMaximum,
+    IncreasingTheMaximumSpeed,
     Shield,
     IncreasesTheGasTank,
     GravityReduction,
@@ -13,35 +13,46 @@ public enum myEnum
 };
 public class UpgradeSystem : MonoBehaviour
 {
-    public Car wheel;
+    public Car car;
+    public UpgradeCar UpgCar;
     [SerializeField] myEnum DropDown;
+    private void Start()
+    {
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             switch (DropDown)
             {
-                case myEnum.IncreasingTheMaximum:
+                case myEnum.IncreasingTheMaximumSpeed:
+                    //Это пока примерный код потом доработать
+                    UpgCar.SpeedUpdate();
                     break;
                 case myEnum.Shield:
+                    UpgCar.ActivateShield();
                     break;
                 case myEnum.IncreasesTheGasTank:
+                    UpgCar.FuelUpdate();
                     break;
                 case myEnum.GravityReduction:
+                    UpgCar.ApplyGravity();
                     break;
                 case myEnum.IncreaseInPoints:
+                    UpgCar.IncreaseinAaccumulated();
                     break;
                 case myEnum.BigWheels:
-                    if (wheel != null)
+                    if (car != null)
                     {
-                        wheel.GetComponent<Car>().UpgradeWheels(); ;
-                        Debug.Log("Машина заправлена!");
+                        car.GetComponent<UpgradeCar>().UpgradeWheels();
                         Debug.Log(DropDown);
                     }
                     break;
                 case myEnum.DeadlyAcceleration:
+                    UpgCar.Acceleration();
                     break;
                 case myEnum.TheClutch:
+                    UpgCar.IncreaseGrip();
                     break;
             }            
         }

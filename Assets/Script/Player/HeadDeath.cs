@@ -1,19 +1,27 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class HeadDeath : MonoBehaviour
 {
-   
-    [SerializeField] private float minDeathSpeed = 8f;
     [SerializeField] private float checkRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
-
-   
     [SerializeField] private Transform headPoint;
+    [SerializeField] private Transform pCar;
     [SerializeField] private Rigidbody2D playerRigidbody;
+    [SerializeField] private UpgradeCar upg;
 
     private bool isDead;
-
+    private void RespawnWithShield()
+    {
+        upg.isShieldActive = false;
+        Vector3 collisionPoint = headPoint.position;
+        Vector2 head = headPoint.position;
+        playerRigidbody.linearVelocity = Vector2.zero;
+        playerRigidbody.angularVelocity = 0f;
+        pCar.rotation = Quaternion.Euler(new Vector3()); ;
+        pCar.position = collisionPoint + new Vector3(0, collisionPoint.y+4f, collisionPoint.z);
+    }
     private void Awake()
     {
         if (playerRigidbody == null)
@@ -21,7 +29,7 @@ public class HeadDeath : MonoBehaviour
             playerRigidbody = GetComponent<Rigidbody2D>();
             if (playerRigidbody == null)
             {
-                Debug.LogError("Rigidbody2D не найден на объекте!");
+                Debug.LogError("Rigidbody2D �� ������ �� �������!");
             }
         }
     }
@@ -34,7 +42,7 @@ public class HeadDeath : MonoBehaviour
     {
         if (headPoint == null)
         {
-            Debug.LogError("HeadPoint не назначен!");
+            Debug.LogError("HeadPoint �� ��������!");
             return;
         }
         Collider2D[] collisions = Physics2D.OverlapCircleAll(
@@ -42,8 +50,7 @@ public class HeadDeath : MonoBehaviour
             checkRadius,
             groundLayer
         );
-        if (collisions.Length > 0 && playerRigidbody != null &&
-            playerRigidbody.velocity.magnitude > minDeathSpeed)
+        if (collisions.Length > 0 && playerRigidbody != null)
         {
             StartCoroutine(ReloadLevel());
         }
@@ -51,24 +58,26 @@ public class HeadDeath : MonoBehaviour
 
     private System.Collections.IEnumerator ReloadLevel()
     {
-        isDead = true;
-
-       
-        Car _car = GetComponent<Car>();
-        if (_car != null)
+        if (upg.isShieldActive)
         {
-            _car._check = false;
+            RespawnWithShield();
         }
-
-        if (playerRigidbody != null)
+        else
         {
-            playerRigidbody.velocity = Vector2.zero;
+            isDead = true;
+            Car _car = GetComponent<Car>();
+            if (_car != null)
+            {
+                _car._check = false;
+            }
+            if (playerRigidbody != null)
+            {
+                playerRigidbody.linearVelocity = Vector2.zero;
+            }
+            yield return new WaitForSeconds(1f);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
     private void OnDrawGizmosSelected()
     {
         if (headPoint != null)
