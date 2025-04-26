@@ -9,6 +9,7 @@ public interface ICar
     WheelJoint2D[] wheelJoints { get; }
     Transform centerOfMass { get; }
     bool checkfuel { get; }
+    int isDead { get; }
     Rigidbody2D rb { get; }
     float moveInput { get; }
     bool isMobileInput { get; }
@@ -23,11 +24,18 @@ public interface ICar
     float torqueInput { get; }
     float NInputTorque { get; }
     float PInputTorque { get; }
-    public void EnableControl(bool state);
+   /* float baseScale { get; }
+    float upgradeMultiplier { get; }
+    int maxUpgrades { get; }
+    bool affectPhysics { get; }
+    int currentUpgrades { get; }
+    float currentScale { get; }
+    Transform[] wheelVisuals { get; }*/
+    void EnableControl(bool state);
     void StartMoveCar();
     void UpdateCarMove();
     void FixUpdateMoveCar();
-    public void SetMoveInput(float input);
+    void SetMoveInput(float input);
     float GetMoveInput();
     float GetCurrentSpeed();
     void StopCar();
@@ -42,4 +50,11 @@ public interface ICar
     void AddMoney(int amount);
     int GetCurrentMoney();
     void UpdateMoneyUI();
+    void ResetPosition();
+    /*void StartWheel();
+    void UpgradeWheels();
+    void ApplyWheelScale();
+    void UpdateWheelPhysics(WheelJoint2D wheel);
+    void ResetUpgrades();*/
+     bool IsGrounded();
 }
