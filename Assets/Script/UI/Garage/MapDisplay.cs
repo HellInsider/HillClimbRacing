@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MapDisplay : MonoBehaviour 
 {
+
     [SerializeField] private TMP_Text mapName;
     [SerializeField] private TMP_Text mapDescription;
     [SerializeField] private Image mapImage;
