@@ -23,9 +23,12 @@ public class UpgradeCar : MonoBehaviour
     [SerializeField] float TheMaximumSpeed;
 
     [Header("Гравитация")]
-    [SerializeField] public float baseGravity = 1f;
-    [SerializeField] public float gravityReduction = 10;
-    
+    [SerializeField] public float baseGravity = 9.81f; 
+    [SerializeField] public float gravityReduction = 10f; 
+    [SerializeField] public float minGravityMultiplier = 0.1f; 
+   // [SerializeField] public int maxGravityUpgrades = 5;
+    [SerializeField] public float gravityEffectDuration = 10f;
+
     [Header("Настройки щита")]
     [SerializeField] private GameObject helmetPrefab;
     [SerializeField] private Transform helmetSocket;
@@ -58,6 +61,9 @@ public class UpgradeCar : MonoBehaviour
     private GameObject currentHelmet;
     private Vector3 deathPosition;
     private float tempSpeed;
+    private int gravityUpgradeCount = 0;
+    private float previousGravityMultiplier = 1f;
+    private bool isGravityEffectActive = false;
     private void Start()
     {
         StartWheel();
@@ -68,6 +74,7 @@ public class UpgradeCar : MonoBehaviour
         tempSpeed = car._engineForce;
         //LoadShieldProgress();
         ApplyGripSettings();
+        ResetGravity();
     }
    
     public float UpdateVariable (float Variable, float Percent)
@@ -86,7 +93,7 @@ public class UpgradeCar : MonoBehaviour
             timer -= Time.deltaTime;
             Debug.Log(timer);
         }
-        else
+        else if (timer < 0)
         {
             DeadlyAcceleration = false;
             car._engineForce = tempSpeed;
@@ -157,13 +164,42 @@ public class UpgradeCar : MonoBehaviour
     }
     public void ApplyGravity()
     {
+       /* if (gravityUpgradeCount >= maxGravityUpgrades)
+        {
+            Debug.Log("Достигнут максимум улучшений гравитации!");
+            return;
+        }*/
+        if (isGravityEffectActive)
+        {
+            Debug.Log("Эффект гравитации уже активен, ждите завершения!");
+            return;
+        }
+        previousGravityMultiplier = currentGravityMultiplier;
         currentGravityMultiplier = UpdateVariable(currentGravityMultiplier, gravityReduction);
-        Physics2D.gravity = new Vector2(
-            0f,
-            -Mathf.Abs(Physics2D.gravity.y) * currentGravityMultiplier           
-        );
-        Debug.Log(currentGravityMultiplier.ToString());
-        Debug.Log(-Mathf.Abs(Physics2D.gravity.y) * currentGravityMultiplier);
+        currentGravityMultiplier = Mathf.Max(currentGravityMultiplier, minGravityMultiplier);
+        gravityUpgradeCount++;
+        Physics2D.gravity = new Vector2(0f, -baseGravity * currentGravityMultiplier);
+        isGravityEffectActive = true;
+        Debug.Log($"Гравитация уменьшена: {Physics2D.gravity.y} (Множитель: {currentGravityMultiplier}, Уровень: {gravityUpgradeCount})");
+        StartCoroutine(GravityEffectTimer());
+    }
+    private IEnumerator GravityEffectTimer()
+    {
+        yield return new WaitForSeconds(gravityEffectDuration);
+        currentGravityMultiplier = previousGravityMultiplier;
+        Physics2D.gravity = new Vector2(0f, -baseGravity * currentGravityMultiplier);
+        isGravityEffectActive = false;
+        Debug.Log($"Гравитация восстановлена: {Physics2D.gravity.y} (Множитель: {currentGravityMultiplier})");
+    }
+    public void ResetGravity()
+    {
+        currentGravityMultiplier = 1f;
+        previousGravityMultiplier = 1f;
+        gravityUpgradeCount = 0;
+        isGravityEffectActive = false;
+        Physics2D.gravity = new Vector2(0f, -baseGravity);
+        StopAllCoroutines();
+        Debug.Log($"Гравитация сброшена: {Physics2D.gravity.y}");
     }
     public void ActivateShield()
     {
