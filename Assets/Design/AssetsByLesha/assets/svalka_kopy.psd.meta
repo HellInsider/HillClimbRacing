@@ -484,7 +484,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      svalka_kopy_0: -2366314265263589098
+      svalka_kopy_1: -494921663766497725
+      svalka_kopy_10: 2820517682231390619
+      svalka_kopy_11: -8168539885348843804
+      svalka_kopy_12: -619430391889109888
+      svalka_kopy_13: 9070047847625652486
+      svalka_kopy_14: 763445544169978746
+      svalka_kopy_2: 5258531788842072239
+      svalka_kopy_3: -6742568298422359560
+      svalka_kopy_4: 4204203905713939793
+      svalka_kopy_5: 4735526641186969179
+      svalka_kopy_6: 2460125508043117926
+      svalka_kopy_7: 578274771963732569
+      svalka_kopy_8: 7405832514740739770
+      svalka_kopy_9: -362888950562244537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

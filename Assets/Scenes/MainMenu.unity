@@ -225,8 +225,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
+  m_EventSystem: {fileID: 0}
+  m_InputOverride: {fileID: 0}
+  m_DefaultInput: {fileID: 0}
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_TrackedDeviceDragThresholdMultiplier: 2
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
@@ -1477,11 +1481,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461995833}
   m_CullTransparentMesh: 1
---- !u!82 &1558681638 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7789170205288346599, guid: 6575179553a016b42b1688ebc0cbf25b, type: 3}
-  m_PrefabInstance: {fileID: 600154478846103407}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1565735659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,9 +1621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53eec1fca9f26f347b033a074e96545c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1558681638}
-  musicToggle: {fileID: 1925276614}
-  volumeSlider: {fileID: 847812424}
+  audioSource: {fileID: 0}
+  musicToggle: {fileID: 0}
+  volumeSlider: {fileID: 0}
 --- !u!1 &1925276612
 GameObject:
   m_ObjectHideFlags: 0

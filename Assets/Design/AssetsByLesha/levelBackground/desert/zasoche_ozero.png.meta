@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      zasoche_ozero_0: 7386063087830018864
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

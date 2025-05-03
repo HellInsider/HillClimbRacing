@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      zelenue_prostory_0: 6180519661145741192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

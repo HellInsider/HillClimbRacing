@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      kirpichi_0: 2303733053798947930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

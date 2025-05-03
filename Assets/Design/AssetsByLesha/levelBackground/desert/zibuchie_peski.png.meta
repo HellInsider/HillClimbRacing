@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      zibuchie_peski_0: -4728127031860869596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

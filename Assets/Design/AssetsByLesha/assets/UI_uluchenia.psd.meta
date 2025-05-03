@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UI_uluchenia_0: 5461317961746969791
+      UI_uluchenia_1: -8613858339653325723
+      UI_uluchenia_2: -9017610489597125082
+      UI_uluchenia_3: 8068922824413590015
+      UI_uluchenia_4: -8910522124379927921
+      UI_uluchenia_5: -8538662426782117086
+      UI_uluchenia_6: 6630682309126783492
+      UI_uluchenia_7: -8484045705176723943
+      UI_uluchenia_8: -8593472167116778437
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
