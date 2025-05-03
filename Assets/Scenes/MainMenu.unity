@@ -892,7 +892,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1116343828}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
         m_MethodName: SliderMusic
         m_Mode: 1
@@ -1059,7 +1059,6 @@ GameObject:
   - component: {fileID: 1116343822}
   - component: {fileID: 1116343824}
   - component: {fileID: 1116343823}
-  - component: {fileID: 1116343828}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -1127,22 +1126,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116343821}
   m_CullTransparentMesh: 1
---- !u!114 &1116343828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116343821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53eec1fca9f26f347b033a074e96545c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleMusic: {fileID: 1925276614}
-  sliderVolumeMusic: {fileID: 847812424}
-  audio: {fileID: 1558681638}
-  volume: 0
 --- !u!1 &1162661814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1605,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15dd4dd1e8d0443478d27cd1fae9df6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1884023867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3859278128795398830, guid: 6575179553a016b42b1688ebc0cbf25b, type: 3}
+  m_PrefabInstance: {fileID: 600154478846103407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1884023869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884023867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53eec1fca9f26f347b033a074e96545c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1558681638}
+  musicToggle: {fileID: 1925276614}
+  volumeSlider: {fileID: 847812424}
 --- !u!1 &1925276612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,7 +1710,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1116343828}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
         m_MethodName: ToggleMusic
         m_Mode: 1
@@ -1962,7 +1965,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3859278128795398830, guid: 6575179553a016b42b1688ebc0cbf25b, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1884023869}
   m_SourcePrefab: {fileID: 100100000, guid: 6575179553a016b42b1688ebc0cbf25b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

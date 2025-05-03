@@ -7,11 +7,7 @@ public class ScriptableObjectsController : MonoBehaviour
     [SerializeField] private MapDisplay mapDisplay;
     private int currentIndex;
 
-    public void BackToMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
-    }
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
