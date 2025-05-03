@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VW_Golf_II_bw.svg_0: -3231141139191528900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
