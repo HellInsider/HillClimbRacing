@@ -26,7 +26,6 @@ public class UpgradeSystem : MonoBehaviour
             switch (DropDown)
             {
                 case myEnum.IncreasingTheMaximumSpeed:
-                    //Это пока примерный код потом доработать
                     UpgCar.SpeedUpdate();
                     break;
                 case myEnum.Shield:
@@ -36,7 +35,7 @@ public class UpgradeSystem : MonoBehaviour
                     UpgCar.FuelUpdate();
                     break;
                 case myEnum.GravityReduction:
-                    UpgCar.ApplyGravity();
+                   // UpgCar.ApplyGravity();
                     break;
                 case myEnum.IncreaseInPoints:
                     UpgCar.IncreaseinAaccumulated();
