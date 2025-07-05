@@ -18,7 +18,7 @@ public class LevelMenager : MonoBehaviour
         public float mountainThreshold;
         public float objectSpawnChance;
         public float smoothing;
-       // public Texture2D terrainTexture;
+        public Texture2D terrainTexture;
         public GameObject[] environmentObjects;
         public Color terrainColor;
     }
@@ -92,8 +92,7 @@ public class LevelMenager : MonoBehaviour
         terrainGenerator.mountainThreshold = settings.mountainThreshold;
         terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
         terrainGenerator.smoothing = settings.smoothing;
-        terrainGenerator.lineRenderer.startColor = settings.terrainColor;
-        terrainGenerator.lineRenderer.endColor = settings.terrainColor;
+        terrainGenerator.yourTexture = settings.terrainTexture;
         terrainGenerator.environmentObjects = settings.environmentObjects;
         UpdateExistingChunks(settings.terrainColor);
     }
