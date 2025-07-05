@@ -23,11 +23,11 @@ public class UpgradeCar : MonoBehaviour
     [SerializeField] float TheMaximumSpeed;
 
     [Header("Гравитация")]
-    [SerializeField] public float baseGravity = 9.81f; 
+   /* [SerializeField] public float baseGravity =1f; 
     [SerializeField] public float gravityReduction = 10f; 
     [SerializeField] public float minGravityMultiplier = 0.1f; 
    // [SerializeField] public int maxGravityUpgrades = 5;
-    [SerializeField] public float gravityEffectDuration = 10f;
+    [SerializeField] public float gravityEffectDuration = 10f;*/
 
     [Header("Настройки щита")]
     [SerializeField] private GameObject helmetPrefab;
@@ -74,7 +74,7 @@ public class UpgradeCar : MonoBehaviour
         tempSpeed = car._engineForce;
         //LoadShieldProgress();
         ApplyGripSettings();
-        ResetGravity();
+       // ResetGravity();
     }
    
     public float UpdateVariable (float Variable, float Percent)
@@ -162,13 +162,13 @@ public class UpgradeCar : MonoBehaviour
             Debug.Log(car._engineForce.ToString());
         }
     }
-    public void ApplyGravity()
+    /*public void ApplyGravity()
     {
        /* if (gravityUpgradeCount >= maxGravityUpgrades)
         {
             Debug.Log("Достигнут максимум улучшений гравитации!");
             return;
-        }*/
+        }
         if (isGravityEffectActive)
         {
             Debug.Log("Эффект гравитации уже активен, ждите завершения!");
@@ -200,7 +200,7 @@ public class UpgradeCar : MonoBehaviour
         Physics2D.gravity = new Vector2(0f, -baseGravity);
         StopAllCoroutines();
         Debug.Log($"Гравитация сброшена: {Physics2D.gravity.y}");
-    }
+    }*/
     public void ActivateShield()
     {
         isShieldActive = true;

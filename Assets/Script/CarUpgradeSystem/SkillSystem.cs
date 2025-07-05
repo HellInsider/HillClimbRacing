@@ -133,7 +133,7 @@ public class SkillSystem : MonoBehaviour
                 upgradeCar.UpgradeWheels();
                 break;
             case SkillType.ApplyGravity:
-                upgradeCar.ApplyGravity();
+               // upgradeCar.ApplyGravity();
                 break;
             case SkillType.ActivateShield:
                 upgradeCar.ActivateShield();

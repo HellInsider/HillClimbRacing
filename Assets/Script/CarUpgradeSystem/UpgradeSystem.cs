@@ -35,7 +35,7 @@ public class UpgradeSystem : MonoBehaviour
                     UpgCar.FuelUpdate();
                     break;
                 case myEnum.GravityReduction:
-                    UpgCar.ApplyGravity();
+                   // UpgCar.ApplyGravity();
                     break;
                 case myEnum.IncreaseInPoints:
                     UpgCar.IncreaseinAaccumulated();
