@@ -1069,14 +1069,16 @@ MonoBehaviour:
     mountainThreshold: 0
     objectSpawnChance: 0
     smoothing: 0
+    terrainTexture: {fileID: 2800000, guid: e98c264c9f2b55d48b645bff817bb9e5, type: 3}
     environmentObjects: []
-    terrainColor: {r: 1, g: 0.91762936, b: 0, a: 0}
+    terrainColor: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 0}
   desertSettings:
     perlinNoiseFrequency: 0
     heightVariation: 0
     mountainThreshold: 0
     objectSpawnChance: 0
     smoothing: 0
+    terrainTexture: {fileID: 2800000, guid: 084cd2ba6d9afbc4096dd9671f5218d3, type: 3}
     environmentObjects: []
     terrainColor: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 259219967}
