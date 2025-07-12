@@ -23,11 +23,11 @@ public class UpgradeCar : MonoBehaviour
     [SerializeField] float TheMaximumSpeed;
 
     [Header("Гравитация")]
-   /* [SerializeField] public float baseGravity =1f; 
+    [SerializeField] public float baseGravity =100; 
     [SerializeField] public float gravityReduction = 10f; 
     [SerializeField] public float minGravityMultiplier = 0.1f; 
-   // [SerializeField] public int maxGravityUpgrades = 5;
-    [SerializeField] public float gravityEffectDuration = 10f;*/
+    [SerializeField] public int maxGravityUpgrades = 5;
+    [SerializeField] public float gravityEffectDuration = 10f;
 
     [Header("Настройки щита")]
     [SerializeField] private GameObject helmetPrefab;
@@ -38,10 +38,11 @@ public class UpgradeCar : MonoBehaviour
 
     [Header("Увеличение накопленных очков")]
     [SerializeField] private int increase;
+
     [Header("Смертельное ускорение")]
     [SerializeField] public float time = 5f;
+
     [Header("Настройки сцепления")]
-  
     [SerializeField] private float baseFrequency = 5f;       
     [SerializeField] private float baseMotorTorque = 500f;   
     [SerializeField] private float gripStep = 1f;           
@@ -50,8 +51,8 @@ public class UpgradeCar : MonoBehaviour
     private float currentGripMultiplier = 1f;
     private float timer;
     private bool DeadlyAcceleration;
-    private GameObject activeHelmet;
-    private float savedFuel; 
+  //private GameObject activeHelmet;
+  //private float savedFuel; 
     private int currentUpgrades = 0;
     private float currentScale;
     private Transform centerOfMass;
@@ -74,7 +75,7 @@ public class UpgradeCar : MonoBehaviour
         tempSpeed = car._engineForce;
         //LoadShieldProgress();
         ApplyGripSettings();
-       // ResetGravity();
+        ResetGravity();
     }
    
     public float UpdateVariable (float Variable, float Percent)
@@ -118,7 +119,10 @@ public class UpgradeCar : MonoBehaviour
     {
         foreach (var wheel in wheelJoints)
         {
-            if (wheel == null) continue;
+            if (wheel == null)
+            {
+                continue;
+            }
 
             Transform wheelTransform = wheel.transform;
             wheelTransform.localScale = Vector3.one * currentScale;
@@ -162,9 +166,9 @@ public class UpgradeCar : MonoBehaviour
             Debug.Log(car._engineForce.ToString());
         }
     }
-    /*public void ApplyGravity()
+    public void ApplyGravity()
     {
-       /* if (gravityUpgradeCount >= maxGravityUpgrades)
+       if (gravityUpgradeCount >= maxGravityUpgrades)
         {
             Debug.Log("Достигнут максимум улучшений гравитации!");
             return;
@@ -200,7 +204,7 @@ public class UpgradeCar : MonoBehaviour
         Physics2D.gravity = new Vector2(0f, -baseGravity);
         StopAllCoroutines();
         Debug.Log($"Гравитация сброшена: {Physics2D.gravity.y}");
-    }*/
+    }
     public void ActivateShield()
     {
         isShieldActive = true;

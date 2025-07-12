@@ -41,14 +41,14 @@ public class SkillSystem : MonoBehaviour
     [SerializeField]
     private SkillInfo[] availableSkills = new SkillInfo[]
     {
-        new SkillInfo { type = SkillType.SpeedUpdate, name = "Увеличение скорости", description = "Увеличивает силу двигателя" },
-        new SkillInfo { type = SkillType.FuelUpdate, name = "Увеличение бака", description = "Увеличивает максимальный объем топлива но снижает скорость" },
-        new SkillInfo { type = SkillType.UpgradeWheels, name = "Большие колеса", description = "Увеличивает размер колес" },
-        new SkillInfo { type = SkillType.ApplyGravity, name = "Снижение гравитации", description = "Временно уменьшает гравитацию но и скорость" },
-        new SkillInfo { type = SkillType.ActivateShield, name = "Щит", description = "Добавляет одну жизнь." },
-        new SkillInfo { type = SkillType.IncreaseInPoints, name = "Больше очков", description = "Увеличивает деньги" },
-        new SkillInfo { type = SkillType.Acceleration, name = "Смертельное ускорение", description = "Временно удваивает скорость." },
-        new SkillInfo { type = SkillType.IncreaseGrip, name = "Улучшение сцепления", description = "Увеличивает сцепление колес." }
+        new SkillInfo { type = SkillType.SpeedUpdate, name = "Increased speed", description = "Increases motor power" },
+        new SkillInfo { type = SkillType.FuelUpdate, name = "Tank Enlargement", description = "Increases maximum fuel but decreases speed" },
+        new SkillInfo { type = SkillType.UpgradeWheels, name = "Big Wheels", description = "Increases the size of the wheels" },
+        new SkillInfo { type = SkillType.ApplyGravity, name = "Gravity reduction", description = "Temporarily reduces gravity but also speed" },
+        new SkillInfo { type = SkillType.ActivateShield, name = "Shield", description = "Adds one life." },
+        new SkillInfo { type = SkillType.IncreaseInPoints, name = "More points", description = "Increases money" },
+        new SkillInfo { type = SkillType.Acceleration, name = "Deadly Acceleration", description = "Temporarily doubles speed." },
+        new SkillInfo { type = SkillType.IncreaseGrip, name = "Improved grip", description = "Increases wheel grip." }
     };
     private void Start()
     {
@@ -57,13 +57,12 @@ public class SkillSystem : MonoBehaviour
             Debug.LogError("Car или UpgradeCar не назначены в инспекторе!");
             return;
         }
-
         lastPosition = car.transform.position;
         totalDistanceTraveled = initialDistance;
-
         if (skillSelectionCanvas != null)
+        {
             skillSelectionCanvas.enabled = false;
-
+        }
         if (skillButtons.Length != 3 || skillNames.Length != 3 || skillDescriptions.Length != 3)
         {
             Debug.LogError("Нужно назначить ровно 3 кнопки, названия и описания для UI!");
@@ -71,8 +70,10 @@ public class SkillSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (car == null || isSkillSelectionActive) return;
-
+        if (car == null || isSkillSelectionActive)
+        {
+            return;
+        }
         Vector2 currentPosition = car.transform.position;
         float distanceThisFrame = Vector2.Distance(currentPosition, lastPosition);
         totalDistanceTraveled += distanceThisFrame;
@@ -86,8 +87,10 @@ public class SkillSystem : MonoBehaviour
 
     private void ShowSkillSelection()
     {
-        if (skillSelectionCanvas == null) return;
-
+        if (skillSelectionCanvas == null)
+        {
+            return;
+        }
         Time.timeScale = 0f;
         isSkillSelectionActive = true;
         car.EnableControl(false); 
@@ -119,8 +122,10 @@ public class SkillSystem : MonoBehaviour
 
     private void ApplySkill(SkillType skillType)
     {
-        if (upgradeCar == null) return;
-
+        if (upgradeCar == null)
+        {
+            return;
+        }
         switch (skillType)
         {
             case SkillType.SpeedUpdate:
@@ -133,7 +138,7 @@ public class SkillSystem : MonoBehaviour
                 upgradeCar.UpgradeWheels();
                 break;
             case SkillType.ApplyGravity:
-               // upgradeCar.ApplyGravity();
+                upgradeCar.ApplyGravity();
                 break;
             case SkillType.ActivateShield:
                 upgradeCar.ActivateShield();
