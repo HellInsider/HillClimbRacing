@@ -10,3 +10,7 @@ Not Unique:
 1) Motor sound
 2) Stop sound
 
+Work in future:
+
+1) music for another levels
+2) music for main menu
