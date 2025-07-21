@@ -92,7 +92,7 @@ public class LevelMenager : MonoBehaviour
         terrainGenerator.mountainThreshold = settings.mountainThreshold;
         terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
         terrainGenerator.smoothing = settings.smoothing;
-        terrainGenerator.yourTexture = settings.terrainTexture;
+        terrainGenerator.Texture = settings.terrainTexture;
         terrainGenerator.environmentObjects = settings.environmentObjects;
         UpdateExistingChunks(settings.terrainColor);
     }

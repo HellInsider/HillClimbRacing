@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,10 +13,13 @@ public class TerrainGenerator : MonoBehaviour
     public float smoothing = 0.2f;
     public int subdivisions = 5;
     public int seed;
+    public float widthUnderground = 12;
+    public float offsetUnderground = -1;
     public Transform player;
     public GameObject groundPrefab;
     public GameObject[] environmentObjects;
-    public Texture2D yourTexture;
+    public Texture2D Texture;
+    public Texture2D undergroundTexture;
     public LineRenderer lineRenderer;
 
     public readonly List<GameObject> chunks = new List<GameObject>();
@@ -201,9 +204,9 @@ public class TerrainGenerator : MonoBehaviour
         line.startWidth = 0.5f;
         line.endWidth = 0.5f;
         Material lineMaterial = new Material(Shader.Find("Unlit/Texture"));
-        if (yourTexture != null)
+        if (Texture != null)
         {
-            lineMaterial.mainTexture = yourTexture;
+            lineMaterial.mainTexture = Texture;
         }
         line.material = lineMaterial;
 
@@ -249,10 +252,44 @@ public class TerrainGenerator : MonoBehaviour
 
         line.positionCount = smoothPoints.Count;
         line.SetPositions(smoothPoints.ToArray());
-        if (yourTexture != null)
+
+        // === Второй LineRenderer (Underground) ===
+        GameObject undergroundObj = new GameObject("UndergroundLine");
+        undergroundObj.transform.parent = chunk.transform;
+
+        LineRenderer undergroundLine = undergroundObj.AddComponent<LineRenderer>();
+        undergroundLine.useWorldSpace = true;
+        undergroundLine.loop = false;
+
+        undergroundLine.startWidth = widthUnderground;
+        undergroundLine.endWidth = widthUnderground;
+        
+        Material undergroundMat = new Material(Shader.Find("Unlit/Texture"));
+        if (undergroundTexture != null)
+        {
+            undergroundMat.mainTexture = undergroundTexture;
+            undergroundMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        }
+        undergroundLine.material = undergroundMat;
+
+        float undergroundOffsetY = offsetUnderground;
+        Vector3[] undergroundPoints = smoothPoints
+            .Select(p => new Vector3(p.x, p.y + undergroundOffsetY, p.z + 1))
+            .ToArray();
+
+        undergroundLine.positionCount = undergroundPoints.Length;
+        undergroundLine.SetPositions(undergroundPoints);
+
+        if (undergroundTexture != null)
+        {
+            float length = (undergroundPoints[undergroundPoints.Length - 1] - undergroundPoints[0]).magnitude;
+            undergroundLine.material.mainTextureScale = new Vector2(length / undergroundTexture.width, 1);
+        }
+
+        if (Texture != null)
         {
             float length = (smoothPoints[smoothPoints.Count - 1] - smoothPoints[0]).magnitude;
-            line.material.mainTextureScale = new Vector2(length / yourTexture.width, 1);
+            line.material.mainTextureScale = new Vector2(length / Texture.width, 1);
         }
 
         chunks.Add(chunk);
