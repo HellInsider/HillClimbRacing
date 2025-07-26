@@ -1045,7 +1045,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 1.1528404
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -1072,7 +1072,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510916563}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1174,8 +1174,6 @@ MonoBehaviour:
   upgradeMultiplier: 1.2
   maxUpgrades: 5
   affectPhysics: 0
-  wheelVisuals: []
-  wheelJoints: []
   initialFuelBonus: 50
   speedPenaltyPerLevel: 10
   maxUpgradeLevel: 90
@@ -1263,6 +1261,73 @@ MonoBehaviour:
     name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0441\u0446\u0435\u043F\u043B\u0435\u043D\u0438\u044F"
     description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
       \u0441\u0446\u0435\u043F\u043B\u0435\u043D\u0438\u0435 \u043A\u043E\u043B\u0435\u0441."
+--- !u!60 &510916574
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510916563}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.04119587, y: 0.50049776}
+      - {x: -0.51415825, y: 0.50258905}
+      - {x: -0.6420861, y: 0.23177436}
+      - {x: -0.7361765, y: 0.16566116}
+      - {x: -0.9046345, y: -0.11414373}
+      - {x: -0.90077305, y: -0.49134302}
+      - {x: -0.75932693, y: -0.30841875}
+      - {x: -0.631711, y: -0.26024294}
+      - {x: -0.42954445, y: -0.390535}
+      - {x: -0.38738728, y: -0.47873366}
+      - {x: -0.24276775, y: -0.48459804}
+      - {x: 0.08697319, y: -0.50181377}
+      - {x: 0.28954506, y: -0.4962474}
+      - {x: 0.37599087, y: -0.32689738}
+      - {x: 0.49217987, y: -0.26013994}
+      - {x: 0.66225433, y: -0.3584262}
+      - {x: 0.7777376, y: -0.49909163}
+      - {x: 0.8914499, y: -0.35924685}
+      - {x: 0.891606, y: -0.23227203}
+      - {x: 0.40005875, y: 0.092737734}
+  m_UseDelaunayMesh: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,7 +1912,7 @@ Transform:
   m_GameObject: {fileID: 739051645}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.570979, w: 0.8209647}
-  m_LocalPosition: {x: 1.32, y: -2.12, z: -1}
+  m_LocalPosition: {x: 0.839, y: -1.966, z: -1}
   m_LocalScale: {x: 1, y: 2.2903, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2038,11 +2103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1900368615144478858, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.811
+      value: -10.036
       objectReference: {fileID: 0}
     - target: {fileID: 1900368615144478858, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.015
+      value: -1.001
       objectReference: {fileID: 0}
     - target: {fileID: 1900368615144478858, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2139,6 +2204,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1900368615144478857, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 510916573}
+    - targetCorrespondingSourceObject: {fileID: 1900368615144478857, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 510916574}
     - targetCorrespondingSourceObject: {fileID: 1900368614240073759, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 377711744}

@@ -3,7 +3,7 @@ using UnityEngine;
 public class ColliderLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private EdgeCollider2D edgeCollider;
+    [SerializeField] public EdgeCollider2D edgeCollider;
 
     void Start()
     {
