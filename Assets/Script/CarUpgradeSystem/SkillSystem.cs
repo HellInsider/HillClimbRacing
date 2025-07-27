@@ -11,7 +11,7 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private Button[] skillButtons; 
     [SerializeField] private TextMeshProUGUI[] skillNames; 
     [SerializeField] private TextMeshProUGUI[] skillDescriptions; 
-    [Header("Настройки")]
+    [Header("РќР°СЃС‚СЂРѕР№РєРё")]
     [SerializeField] private float distanceThreshold = 5f; 
     [SerializeField] private float initialDistance = 0f; 
     private float totalDistanceTraveled = 0f; 
@@ -54,7 +54,7 @@ public class SkillSystem : MonoBehaviour
     {
         if (car == null || upgradeCar == null)
         {
-            Debug.LogError("Car или UpgradeCar не назначены в инспекторе!");
+            Debug.LogError("Car РёР»Рё UpgradeCar РЅРµ РЅР°Р·РЅР°С‡РµРЅС‹ РІ РёРЅСЃРїРµРєС‚РѕСЂРµ!");
             return;
         }
         lastPosition = car.transform.position;
@@ -65,7 +65,7 @@ public class SkillSystem : MonoBehaviour
         }
         if (skillButtons.Length != 3 || skillNames.Length != 3 || skillDescriptions.Length != 3)
         {
-            Debug.LogError("Нужно назначить ровно 3 кнопки, названия и описания для UI!");
+            Debug.LogError("РќСѓР¶РЅРѕ РЅР°Р·РЅР°С‡РёС‚СЊ СЂРѕРІРЅРѕ 3 РєРЅРѕРїРєРё, РЅР°Р·РІР°РЅРёСЏ Рё РѕРїРёСЃР°РЅРёСЏ РґР»СЏ UI!");
         }
     }
     private void Update()

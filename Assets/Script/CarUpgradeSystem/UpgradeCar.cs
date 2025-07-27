@@ -6,43 +6,42 @@ public class UpgradeCar : MonoBehaviour
 {
     public Car car;
    
-    [Header("Колеса")]
-    [SerializeField] public float baseScale = 1f;
+    [Header("РљРѕР»РµСЃР°")]
+    [SerializeField] public float baseScale = 1.5f;
     [SerializeField] public float upgradeMultiplier = 1.2f;
     [SerializeField] public int maxUpgrades = 5;
     [SerializeField] public bool affectPhysics = true;
-    [SerializeField] public Transform[] wheelVisuals;
-    [SerializeField] public WheelJoint2D[] wheelJoints;
+    private WheelJoint2D[] wheelJoints;
     
-    [Header("Топливо")]
+    [Header("РўРѕРїР»РёРІРѕ")]
     [SerializeField] public float initialFuelBonus = 20;     
     [SerializeField] public float speedPenaltyPerLevel = 10f;
     [SerializeField] int maxUpgradeLevel = 7;
    
-    [Header("Скорость")]
+    [Header("РЎРєРѕСЂРѕСЃС‚СЊ")]
     [SerializeField] float TheMaximumSpeed;
 
-    [Header("Гравитация")]
+    [Header("Р“СЂР°РІРёС‚Р°С†РёСЏ")]
     [SerializeField] public float baseGravity =100; 
     [SerializeField] public float gravityReduction = 10f; 
     [SerializeField] public float minGravityMultiplier = 0.1f; 
     [SerializeField] public int maxGravityUpgrades = 5;
     [SerializeField] public float gravityEffectDuration = 10f;
 
-    [Header("Настройки щита")]
+    [Header("РќР°СЃС‚СЂРѕР№РєРё С‰РёС‚Р°")]
     [SerializeField] private GameObject helmetPrefab;
     [SerializeField] private Transform helmetSocket;
     [SerializeField] private int shieldLevel = 0;
     [SerializeField] public HeadDeath head;
     public bool isShieldActive;
 
-    [Header("Увеличение накопленных очков")]
+    [Header("РЈРІРµР»РёС‡РµРЅРёРµ РЅР°РєРѕРїР»РµРЅРЅС‹С… РѕС‡РєРѕРІ")]
     [SerializeField] private int increase;
 
-    [Header("Смертельное ускорение")]
+    [Header("РЎРјРµСЂС‚РµР»СЊРЅРѕРµ СѓСЃРєРѕСЂРµРЅРёРµ")]
     [SerializeField] public float time = 5f;
 
-    [Header("Настройки сцепления")]
+    [Header("РќР°СЃС‚СЂРѕР№РєРё СЃС†РµРїР»РµРЅРёСЏ")]
     [SerializeField] private float baseFrequency = 5f;       
     [SerializeField] private float baseMotorTorque = 500f;   
     [SerializeField] private float gripStep = 1f;           
@@ -105,7 +104,7 @@ public class UpgradeCar : MonoBehaviour
     {
         if (currentUpgrades >= maxUpgrades)
         {
-            Debug.Log("Достигнут максимум улучшений колес!");
+            Debug.Log("Р”РѕСЃС‚РёРіРЅСѓС‚ РјР°РєСЃРёРјСѓРј СѓР»СѓС‡С€РµРЅРёР№ РєРѕР»РµСЃ!");
             return;
         }
 
@@ -113,7 +112,7 @@ public class UpgradeCar : MonoBehaviour
         currentScale *= upgradeMultiplier;
 
         ApplyWheelScale();
-        Debug.Log($"Улучшение колес (уровень {currentUpgrades}/{maxUpgrades})");
+        Debug.Log($"РЈР»СѓС‡С€РµРЅРёРµ РєРѕР»РµСЃ (СѓСЂРѕРІРµРЅСЊ {currentUpgrades}/{maxUpgrades})");
     }
     public void ApplyWheelScale()
     {
@@ -126,15 +125,6 @@ public class UpgradeCar : MonoBehaviour
 
             Transform wheelTransform = wheel.transform;
             wheelTransform.localScale = Vector3.one * currentScale;
-        }
-
-        if (wheelVisuals != null)
-        {
-            foreach (var visual in wheelVisuals)
-            {
-                if (visual == null) continue;
-                visual.localScale = Vector3.one * currentScale;
-            }
         }
     }
     public void ResetUpgrades()
@@ -170,12 +160,12 @@ public class UpgradeCar : MonoBehaviour
     {
        if (gravityUpgradeCount >= maxGravityUpgrades)
         {
-            Debug.Log("Достигнут максимум улучшений гравитации!");
+            Debug.Log("Р”РѕСЃС‚РёРіРЅСѓС‚ РјР°РєСЃРёРјСѓРј СѓР»СѓС‡С€РµРЅРёР№ РіСЂР°РІРёС‚Р°С†РёРё!");
             return;
         }
         if (isGravityEffectActive)
         {
-            Debug.Log("Эффект гравитации уже активен, ждите завершения!");
+            Debug.Log("Р­С„С„РµРєС‚ РіСЂР°РІРёС‚Р°С†РёРё СѓР¶Рµ Р°РєС‚РёРІРµРЅ, Р¶РґРёС‚Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ!");
             return;
         }
         previousGravityMultiplier = currentGravityMultiplier;
@@ -184,7 +174,7 @@ public class UpgradeCar : MonoBehaviour
         gravityUpgradeCount++;
         Physics2D.gravity = new Vector2(0f, -baseGravity * currentGravityMultiplier);
         isGravityEffectActive = true;
-        Debug.Log($"Гравитация уменьшена: {Physics2D.gravity.y} (Множитель: {currentGravityMultiplier}, Уровень: {gravityUpgradeCount})");
+        Debug.Log($"Р“СЂР°РІРёС‚Р°С†РёСЏ СѓРјРµРЅСЊС€РµРЅР°: {Physics2D.gravity.y} (РњРЅРѕР¶РёС‚РµР»СЊ: {currentGravityMultiplier}, РЈСЂРѕРІРµРЅСЊ: {gravityUpgradeCount})");
         StartCoroutine(GravityEffectTimer());
     }
     private IEnumerator GravityEffectTimer()
@@ -193,7 +183,7 @@ public class UpgradeCar : MonoBehaviour
         currentGravityMultiplier = previousGravityMultiplier;
         Physics2D.gravity = new Vector2(0f, -baseGravity * currentGravityMultiplier);
         isGravityEffectActive = false;
-        Debug.Log($"Гравитация восстановлена: {Physics2D.gravity.y} (Множитель: {currentGravityMultiplier})");
+        Debug.Log($"Р“СЂР°РІРёС‚Р°С†РёСЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅР°: {Physics2D.gravity.y} (РњРЅРѕР¶РёС‚РµР»СЊ: {currentGravityMultiplier})");
     }
     public void ResetGravity()
     {
@@ -203,7 +193,7 @@ public class UpgradeCar : MonoBehaviour
         isGravityEffectActive = false;
         Physics2D.gravity = new Vector2(0f, -baseGravity);
         StopAllCoroutines();
-        Debug.Log($"Гравитация сброшена: {Physics2D.gravity.y}");
+        Debug.Log($"Р“СЂР°РІРёС‚Р°С†РёСЏ СЃР±СЂРѕС€РµРЅР°: {Physics2D.gravity.y}");
     }
     public void ActivateShield()
     {
