@@ -73,15 +73,15 @@ public class LevelMenager : MonoBehaviour
         terrainGenerator.perlinNoiseFrequency = settings.perlinNoiseFrequency;
         terrainGenerator.heightVariation = settings.heightVariation;
         terrainGenerator.mountainThreshold = settings.mountainThreshold;
-        terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
+       // terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
         terrainGenerator.smoothing = settings.smoothing;
         terrainGenerator.Texture = settings.terrainTexture;
-        terrainGenerator.environmentObjects = settings.environmentObjects;
+       // terrainGenerator.environmentObjects = settings.environmentObjects;
     }
     private void SwitchEnvironment()
     {
         SetEnvironment(currentEnvironment == EnvironmentType.City ? EnvironmentType.Desert : EnvironmentType.City);
-        foreach (GameObject chunk in terrainGenerator.chunks)
+       /* foreach (GameObject chunk in terrainGenerator.chunks)
         {
             foreach (Transform child in chunk.transform)
             {
@@ -90,7 +90,7 @@ public class LevelMenager : MonoBehaviour
                     ReturnPooledObject(child.gameObject);
                 }
             }
-        }
+        }*/
         terrainGenerator.chunks.Clear();
         terrainGenerator.GenerateInitialChunks();
 
