@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,19 +9,26 @@ public class TerrainGenerator : MonoBehaviour
     public float perlinNoiseFrequency = 5f;
     public float heightVariation = 3f;
     public float mountainThreshold = 0.7f;
-    public float objectSpawnChance = 0.1f;
     public float smoothing = 0.2f;
     public int subdivisions = 5;
     public int seed;
+    public float undergroundDepth = 5f;
+    public float coinSpacing = 10f;
+    public float fuelSpacing = 25f;
+    public GameObject coinPrefab;
+    public GameObject fuelPrefab;
     public Transform player;
     public GameObject groundPrefab;
-    public GameObject[] environmentObjects;
-    public Texture2D yourTexture;
+    public EnvironmentObjectSettings[] environmentObjectsSettings;
+    public Texture2D Texture;
+    public Material undergroundMeshMaterial;
     public LineRenderer lineRenderer;
 
     public readonly List<GameObject> chunks = new List<GameObject>();
     private float lastX = 0;
     private float lastY = 0;
+    private float lastCoinX = 0f;
+    private float lastFuelX = 0f;
 
     /*void Start()
     {
@@ -155,6 +162,7 @@ public class TerrainGenerator : MonoBehaviour
     }*/
     private LevelMenager levelManager;
 
+    [System.Obsolete]
     private void Start()
     {
         seed = System.DateTime.Now.Millisecond;
@@ -201,9 +209,9 @@ public class TerrainGenerator : MonoBehaviour
         line.startWidth = 0.5f;
         line.endWidth = 0.5f;
         Material lineMaterial = new Material(Shader.Find("Unlit/Texture"));
-        if (yourTexture != null)
+        if (Texture != null)
         {
-            lineMaterial.mainTexture = yourTexture;
+            lineMaterial.mainTexture = Texture;
         }
         line.material = lineMaterial;
 
@@ -222,20 +230,19 @@ public class TerrainGenerator : MonoBehaviour
             if (i == 0) y = lastY;
             controlPoints.Add(new Vector3(x, y, 0));
 
-            if (Random.value < objectSpawnChance && environmentObjects.Length > 0)
+            foreach (var envObj in environmentObjectsSettings)
             {
-                int index = Random.Range(0, environmentObjects.Length);
-                GameObject obj = levelManager?.GetPooledObject() ?? Instantiate(environmentObjects[index]);
-                if (obj != null)
+                if (envObj.prefab != null && Random.value < envObj.spawnChance)
                 {
-                    obj.transform.position = new Vector3(x, y, 0);
+                    GameObject obj = levelManager?.GetPooledObject() ?? Instantiate(envObj.prefab);
+                    obj.transform.position = new Vector3(x, y + envObj.yOffset, 0);
                     obj.transform.parent = chunk.transform;
+
                     if (!obj.activeSelf)
                     {
                         obj.SetActive(true);
-                        GameObject prefab = environmentObjects[index];
                         var renderer = obj.GetComponent<SpriteRenderer>();
-                        var prefabRenderer = prefab.GetComponent<SpriteRenderer>();
+                        var prefabRenderer = envObj.prefab.GetComponent<SpriteRenderer>();
                         if (renderer != null && prefabRenderer != null)
                         {
                             renderer.sprite = prefabRenderer.sprite;
@@ -243,16 +250,88 @@ public class TerrainGenerator : MonoBehaviour
                     }
                 }
             }
+
+            // Монеты
+            if (coinPrefab != null && x >= lastCoinX + coinSpacing)
+            {
+                GameObject coin = Instantiate(coinPrefab, new Vector3(x, y + 1f, 0), Quaternion.identity, chunk.transform);
+                lastCoinX = x;
+            }
+
+            // Топливо
+            if (fuelPrefab != null && x >= lastFuelX + fuelSpacing)
+            {
+                GameObject fuel = Instantiate(fuelPrefab, new Vector3(x, y + 1f, 0), Quaternion.identity, chunk.transform);
+                lastFuelX = x;
+            }
         }
 
-       List<Vector3> smoothPoints = InterpolateCatmullRom(controlPoints);
+        List<Vector3> smoothPoints = InterpolateCatmullRom(controlPoints);
 
         line.positionCount = smoothPoints.Count;
         line.SetPositions(smoothPoints.ToArray());
-        if (yourTexture != null)
+
+        // === Второй LineRenderer (Underground) ===
+        // === Подземный Mesh ===
+        GameObject undergroundMeshObj = new GameObject("UndergroundMesh");
+        undergroundMeshObj.transform.parent = chunk.transform;
+
+        MeshFilter meshFilter = undergroundMeshObj.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = undergroundMeshObj.AddComponent<MeshRenderer>();
+        meshRenderer.material = undergroundMeshMaterial;
+
+        Mesh mesh = new Mesh();
+
+        int pointCount = smoothPoints.Count;
+        Vector3[] vertices = new Vector3[pointCount * 2];
+        int[] triangles = new int[(pointCount - 1) * 6];
+        Vector2[] uvs = new Vector2[vertices.Length];
+
+        // Верхняя линия
+        for (int i = 0; i < pointCount; i++)
+        {
+            Vector3 top = smoothPoints[i];
+            Vector3 bottom = new Vector3(top.x, top.y - undergroundDepth, top.z);
+
+            vertices[i] = top;
+            vertices[i + pointCount] = bottom;
+
+            // UV по X и Y нормализуем
+            float u = i / (float)(pointCount - 1);
+            uvs[i] = new Vector2(u, 1);
+            uvs[i + pointCount] = new Vector2(u, 0);
+
+            // Треугольники
+            if (i < pointCount - 1)
+            {
+                int t = i * 6;
+
+                int topLeft = i;
+                int topRight = i + 1;
+                int bottomLeft = i + pointCount;
+                int bottomRight = i + 1 + pointCount;
+
+                triangles[t] = topLeft;
+                triangles[t + 1] = bottomLeft;
+                triangles[t + 2] = topRight;
+
+                triangles[t + 3] = topRight;
+                triangles[t + 4] = bottomLeft;
+                triangles[t + 5] = bottomRight;
+            }
+        }
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
+        mesh.RecalculateNormals();
+
+        meshFilter.mesh = mesh;
+
+        if (Texture != null)
         {
             float length = (smoothPoints[smoothPoints.Count - 1] - smoothPoints[0]).magnitude;
-            line.material.mainTextureScale = new Vector2(length / yourTexture.width, 1);
+            line.material.mainTextureScale = new Vector2(length / Texture.width, 1);
         }
 
         chunks.Add(chunk);
