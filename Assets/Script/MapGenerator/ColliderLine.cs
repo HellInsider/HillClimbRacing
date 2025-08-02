@@ -3,7 +3,7 @@ using UnityEngine;
 public class ColliderLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private EdgeCollider2D edgeCollider;
+    [SerializeField] public EdgeCollider2D edgeCollider;
 
     void Start()
     {
@@ -34,7 +34,6 @@ public class ColliderLine : MonoBehaviour
         Vector2[] points = new Vector2[positions.Length];
         for (int i = 0; i < positions.Length; i++)
         {
-            // Convert to local space relative to the chunk's position
             Vector3 localPos = transform.InverseTransformPoint(positions[i]);
             points[i] = new Vector2(localPos.x, localPos.y);
         }

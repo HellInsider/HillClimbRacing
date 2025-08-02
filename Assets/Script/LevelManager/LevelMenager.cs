@@ -1,39 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static BiomInfo;
 public enum EnvironmentType { City, Desert }
 public class LevelMenager : MonoBehaviour
 {
     public int coinVal;
     public float recordTrack;
     public TerrainGenerator terrain;
-    [SerializeField] EnvironmentType DropDown;
-
-
-    [System.Serializable]
-    public struct EnvironmentSettings
-    {
-        public float perlinNoiseFrequency;
-        public float heightVariation;
-        public float mountainThreshold;
-        public float objectSpawnChance;
-        public float smoothing;
-        public Texture2D terrainTexture;
-        public GameObject[] environmentObjects;
-        public Color terrainColor;
-    }
-
-    [SerializeField] private TerrainGenerator terrainGenerator;
-    [SerializeField] private EnvironmentSettings citySettings;
-    [SerializeField] private EnvironmentSettings desertSettings;
-    [SerializeField] private Transform player;
-    [SerializeField] private float transitionDistance = 100f;
-
     private EnvironmentType currentEnvironment;
     private float lastTransitionX;
     private readonly Queue<GameObject> objectPool = new Queue<GameObject>();
     private const int POOL_SIZE = 20;
-
+    [SerializeField] public TerrainGenerator terrainGenerator;
+    [SerializeField] public EnvironmentSettings citySettings;
+    [SerializeField] public EnvironmentSettings desertSettings;
+    [SerializeField] public Transform player;
+    [SerializeField] public float transitionDistance = 100f;
     void Start()
     {
         if (terrainGenerator == null || player == null)
@@ -90,30 +73,15 @@ public class LevelMenager : MonoBehaviour
         terrainGenerator.perlinNoiseFrequency = settings.perlinNoiseFrequency;
         terrainGenerator.heightVariation = settings.heightVariation;
         terrainGenerator.mountainThreshold = settings.mountainThreshold;
-        terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
+       // terrainGenerator.objectSpawnChance = settings.objectSpawnChance;
         terrainGenerator.smoothing = settings.smoothing;
         terrainGenerator.Texture = settings.terrainTexture;
-        terrainGenerator.environmentObjects = settings.environmentObjects;
-        UpdateExistingChunks(settings.terrainColor);
+       // terrainGenerator.environmentObjects = settings.environmentObjects;
     }
-
-    void UpdateExistingChunks(Color terrainColor)
-    {
-        foreach (GameObject chunk in terrainGenerator.chunks)
-        {
-            LineRenderer line = chunk.GetComponent<LineRenderer>();
-            if (line != null)
-            {
-                line.startColor = terrainColor;
-                line.endColor = terrainColor;
-            }
-        }
-    }
-
     private void SwitchEnvironment()
     {
         SetEnvironment(currentEnvironment == EnvironmentType.City ? EnvironmentType.Desert : EnvironmentType.City);
-        foreach (GameObject chunk in terrainGenerator.chunks)
+       /* foreach (GameObject chunk in terrainGenerator.chunks)
         {
             foreach (Transform child in chunk.transform)
             {
@@ -122,7 +90,7 @@ public class LevelMenager : MonoBehaviour
                     ReturnPooledObject(child.gameObject);
                 }
             }
-        }
+        }*/
         terrainGenerator.chunks.Clear();
         terrainGenerator.GenerateInitialChunks();
 

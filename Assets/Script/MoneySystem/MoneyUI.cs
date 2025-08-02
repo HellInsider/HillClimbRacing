@@ -11,7 +11,7 @@ public class MoneyUI : MonoBehaviour
     {
         if (moneySystem != null && moneyText != null)
         {
-            moneyText.text = $"Δενόγθ: {moneySystem.GetCurrentMoney()}";
+            moneyText.text = $"Money: {moneySystem.GetCurrentMoney()}";
         }
     }
 }
