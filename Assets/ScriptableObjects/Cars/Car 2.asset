@@ -15,5 +15,5 @@ MonoBehaviour:
   carIndex: 1
   carName: Second
   carDescription: Better
-  carImage: {fileID: -3231141139191528900, guid: 0a3aca851929c2147a7216406bad811b, type: 3}
+  carImage: {fileID: -1452844263595992844, guid: 5d2ed43ae2a0c264891a3a5a74316046, type: 3}
   carPrefab: {fileID: 1900368615144478857, guid: 705fed051c31f944487a24a5a29561a3, type: 3}
