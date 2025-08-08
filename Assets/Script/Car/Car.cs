@@ -16,6 +16,8 @@ public class Car : MonoBehaviour, ICar
     [SerializeField] public float _maxFuel;
     [SerializeField] public float _Expenditure;
     [SerializeField] public float _refillAmount;
+    [Header("Game Over")]
+    [SerializeField] private GameOver gameOver;
     /*[Header("Wheel")]
     [SerializeField] private float _baseScale = 1f;
     [SerializeField] private float _upgradeMultiplier = 1.2f;
@@ -38,7 +40,6 @@ public class Car : MonoBehaviour, ICar
     public WheelJoint2D[] wheelJoints => _wheelJoints;
     public Transform centerOfMass => _centerOfMass;
     public bool isMobileInput => _isMobileInput;
-    //�������
     public bool checkfuel => _check;
     public Rigidbody2D rb => _rb;
     public float moveInput => _moveInput;
@@ -167,11 +168,14 @@ public class Car : MonoBehaviour, ICar
     public void StartFuel()
     {
         _currentFuel = _maxFuel;
-        //_carController = GetComponent<MoveCar>();
+       
     }
     public void UpdateFuel()
     {
-        if (_isOutOfFuel) return;
+        if (_isOutOfFuel)
+        {
+            return;
+        }
         if (IsCarMoving())
         {
             _currentFuel -= _Expenditure * Time.deltaTime;
@@ -191,9 +195,11 @@ public class Car : MonoBehaviour, ICar
     {
         _isOutOfFuel = true;
         Debug.Log("������� �����������!");
-        StopCar();
+        //StopCar();
+       // _engineForce = 0;
         _check = false;
         _isDead--;
+        gameOver.GameOverPlayer();
     }
     public void RefillFuel()
     {

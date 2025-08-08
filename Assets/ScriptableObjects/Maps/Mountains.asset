@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b40534d53b29134db19f59a42574765, type: 3}
+  m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Mountains
   m_EditorClassIdentifier: 
-  mapIndex: 3
-  mapName: mountain
-  mapDescription: jgjfk
-  mapImage: {fileID: -5353630856414969046, guid: 663ca41ba92c20a4fb1c90d63ce7de70, type: 3}
+  mapIndex: 6
+  mapName: Mounytains
+  mapDescription: Purely from me, the advice is to take a car with a high suspension
+  mapImage: {fileID: 3667946746360358012, guid: 158bc24057c46eb4da785ccf31fedcd9, type: 3}
   sceneToLoad: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Frozen Wasteland
   m_EditorClassIdentifier: 
-  mapIndex: 2
+  mapIndex: 3
   mapName: Frozen Wasteland
   mapDescription: Very cold
   mapImage: {fileID: -4232709475188921343, guid: ed72f4077a7a81547b547143efec819a, type: 3}

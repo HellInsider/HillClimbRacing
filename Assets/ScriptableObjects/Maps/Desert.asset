@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b40534d53b29134db19f59a42574765, type: 3}
+  m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Desert
   m_EditorClassIdentifier: 
-  mapIndex: 1
-  mapName: desert
-  mapDescription: 
-  mapImage: {fileID: 3003405718794592452, guid: f080d07caed64d34fb891f8515487d2c, type: 3}
+  mapIndex: 2
+  mapName: Desrt
+  mapDescription: The same to the beach but without water
+  mapImage: {fileID: 2933845435147071396, guid: 8180d8a5c19c9b54098fc9b05333d337, type: 3}
   sceneToLoad: {fileID: 0}

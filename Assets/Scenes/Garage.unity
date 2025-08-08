@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 271260296}
+      - m_Target: {fileID: 271260297}
         m_TargetAssemblyTypeName: ScriptableObjectsController, Assembly-CSharp
         m_MethodName: ChangeScriptableObject
         m_Mode: 3
@@ -396,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271260295}
-  - component: {fileID: 271260296}
+  - component: {fileID: 271260297}
   m_Layer: 5
   m_Name: Mapcontrroller
   m_TagString: Untagged
@@ -427,7 +427,7 @@ RectTransform:
   m_AnchoredPosition: {x: 2.38, y: 55.759995}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &271260296
+--- !u!114 &271260297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,14 +436,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 271260294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c328fa44fa6f064a895843861346a3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 46e770b46bf5da745a9110fd03f2886a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scriptableObjects:
-  - {fileID: 11400000, guid: 89163d8b554c3f14dac69d966b48d13b, type: 2}
-  - {fileID: 11400000, guid: ed309e034c1898348b2f1e1c6096cf08, type: 2}
-  - {fileID: 11400000, guid: 0ffd63ce9a0923b43ae69e91c3c02a80, type: 2}
+  - {fileID: 11400000, guid: ed3c553be3c36b647a3b3dca7fdf2492, type: 2}
   - {fileID: 11400000, guid: 2116e366aaab0cb4a8cd1d661732d117, type: 2}
+  - {fileID: 11400000, guid: ed309e034c1898348b2f1e1c6096cf08, type: 2}
+  - {fileID: 11400000, guid: ccf832b0192718947b6f22162c7abaa2, type: 2}
+  - {fileID: 11400000, guid: 89163d8b554c3f14dac69d966b48d13b, type: 2}
+  - {fileID: 11400000, guid: 0eb25799fa9c50a4cb98203fc0e115e5, type: 2}
+  - {fileID: 11400000, guid: 0ffd63ce9a0923b43ae69e91c3c02a80, type: 2}
+  - {fileID: 11400000, guid: 0b121f4b06b5ee54d808ad95e66a85b5, type: 2}
   mapDisplay: {fileID: 1229560080}
 --- !u!1 &329031000
 GameObject:
@@ -1184,13 +1188,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1229560078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7c9bcff97475847bea1f5e74b04c93, type: 3}
+  m_Script: {fileID: 11500000, guid: 744dd6afcd2101a4fa651b2e1b0cc9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: {fileID: 1337539076}
   mapDescription: {fileID: 22433648}
   mapImage: {fileID: 1286692364}
-  playButton: {fileID: 0}
+  playButton: {fileID: 1303761448}
   lockImage: {fileID: 0}
 --- !u!1 &1263348358
 GameObject:
@@ -1493,7 +1497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 271260296}
+      - m_Target: {fileID: 271260297}
         m_TargetAssemblyTypeName: ScriptableObjectsController, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -2076,7 +2080,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 271260296}
+      - m_Target: {fileID: 271260297}
         m_TargetAssemblyTypeName: ScriptableObjectsController, Assembly-CSharp
         m_MethodName: ChangeScriptableObject
         m_Mode: 3

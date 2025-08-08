@@ -10,7 +10,7 @@ public class HeadDeath : MonoBehaviour
     [SerializeField] private Transform pCar;
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private UpgradeCar upg;
-
+    [SerializeField] private GameOver gameOver;
     private bool isDead;
     private void RespawnWithShield()
     {
@@ -74,8 +74,9 @@ public class HeadDeath : MonoBehaviour
             {
                 playerRigidbody.linearVelocity = Vector2.zero;
             }
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            yield return new WaitForSeconds(0f);
+            gameOver.GameOverPlayer();
         }
     }
     private void OnDrawGizmosSelected()
