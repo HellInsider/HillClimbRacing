@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Space
   m_EditorClassIdentifier: 
-  mapIndex: 4
+  mapIndex: 7
   mapName: Space
   mapDescription: Very quit
   mapImage: {fileID: -5858099061022299432, guid: ec246ec05d07bbf4294da7459ceb860a, type: 3}

@@ -15,5 +15,5 @@ MonoBehaviour:
   mapIndex: 5
   mapName: Jungle
   mapDescription: Beautiful nature
-  mapImage: {fileID: 9075235344321003868, guid: 0905f734a5230c446bc01ff283e76baa, type: 3}
+  mapImage: {fileID: 3217321947677797740, guid: e961d01524c84e948bf7b4cd01d81391, type: 3}
   sceneToLoad: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Green Meadows
   m_EditorClassIdentifier: 
-  mapIndex: 0
+  mapIndex: 4
   mapName: Green Meadows
-  mapDescription: Beautifel Meadows
-  mapImage: {fileID: -8182687282547081770, guid: 4c5e91f1933789f44a46efc3707f316a, type: 3}
+  mapDescription: where are the sheep grazing
+  mapImage: {fileID: 3997971038976187057, guid: f89251d31d2f4684cb62a53dbaff8bf1, type: 3}
   sceneToLoad: {fileID: 0}

@@ -16,9 +16,8 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private float initialDistance = 0f; 
     private float totalDistanceTraveled = 0f; 
     private Vector2 lastPosition; 
-    private bool isSkillSelectionActive = false; 
-
-    
+    private bool isSkillSelectionActive = false;
+    public LevelMenager LevelMenager;
     private enum SkillType
     {
         SpeedUpdate,
@@ -77,6 +76,7 @@ public class SkillSystem : MonoBehaviour
         Vector2 currentPosition = car.transform.position;
         float distanceThisFrame = Vector2.Distance(currentPosition, lastPosition);
         totalDistanceTraveled += distanceThisFrame;
+        LevelMenager.recordTrack += distanceThisFrame;
         lastPosition = currentPosition;
         if (totalDistanceTraveled >= distanceThreshold)
         {

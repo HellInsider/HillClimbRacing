@@ -7,15 +7,12 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 827e0b88b9a614f4a82dc5ba52bcdaa8
-  - enabled: 1
-    path: Assets/Scenes/CarToPlay.unity
-    guid: a6b66a86ce266874092587f3337ba330
+    guid: a6c830e940c4e004faa4c04e04e7c0f2
   - enabled: 1
     path: Assets/Scenes/Garage.unity
     guid: 8f65eaf1623c5cd489c601501b4c853d
   - enabled: 1
-    path: Assets/Scenes/TempCarScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/LevelTemplate.unity
+    guid: 484af7d7e85ad274886398919c508c92
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

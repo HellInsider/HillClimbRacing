@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Desert
   m_EditorClassIdentifier: 
-  mapIndex: 1
-  mapName: Desert
-  mapDescription: Beautiful Desert
-  mapImage: {fileID: -8912292189398466726, guid: 01778537ddff6834390fe27b901e9c67, type: 3}
+  mapIndex: 2
+  mapName: Desrt
+  mapDescription: The same to the beach but without water
+  mapImage: {fileID: 2933845435147071396, guid: 8180d8a5c19c9b54098fc9b05333d337, type: 3}
   sceneToLoad: {fileID: 0}

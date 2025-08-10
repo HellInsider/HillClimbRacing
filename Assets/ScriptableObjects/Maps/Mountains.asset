@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Mountains
   m_EditorClassIdentifier: 
-  mapIndex: 3
-  mapName: Mountains
-  mapDescription: Very high
-  mapImage: {fileID: 6963322998463068953, guid: 33ad4ed1662b4c04ba7418830642a7fa, type: 3}
+  mapIndex: 6
+  mapName: Mounytains
+  mapDescription: Purely from me, the advice is to take a car with a high suspension
+  mapImage: {fileID: 3667946746360358012, guid: 158bc24057c46eb4da785ccf31fedcd9, type: 3}
   sceneToLoad: {fileID: 0}

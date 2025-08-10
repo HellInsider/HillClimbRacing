@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: City
   m_EditorClassIdentifier: 
-  mapIndex: 6
+  mapIndex: 1
   mapName: City
-  mapDescription: Very noisy
-  mapImage: {fileID: 7961463184084027955, guid: fd547b72730d184448dbe4454143ecaf, type: 3}
+  mapDescription: A place with a lot of money
+  mapImage: {fileID: -6286138381300217021, guid: 6da7a2ac81e4f9f4abc29b8a6e6cfe1e, type: 3}
   sceneToLoad: {fileID: 0}

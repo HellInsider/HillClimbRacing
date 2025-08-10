@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95ac3b2046eec4787061cd25310fab, type: 3}
   m_Name: Beach
   m_EditorClassIdentifier: 
-  mapIndex: 7
+  mapIndex: 0
   mapName: Beach
-  mapDescription: Very wet
-  mapImage: {fileID: -6146795774391780013, guid: 96b55b6953db0654c94c40d1a73aae08, type: 3}
+  mapDescription: This is the beach brother
+  mapImage: {fileID: -1448725598348539535, guid: 1e3843348a098fc438ac2f9017e09257, type: 3}
   sceneToLoad: {fileID: 0}

@@ -11,11 +11,13 @@ public class BiomInfo : ScriptableObject
         public float perlinNoiseFrequency;
         public float heightVariation;
         public float mountainThreshold;
-        public float objectSpawnChance;
         public float smoothing;
         public Texture2D terrainTexture;
-        public GameObject[] environmentObjects;
-        
+        public EnvironmentObjectSettings[] environmentObjects;
+        public float coinSpacing;
+        public float fuelSpacing;
+        public float speedPenalty; 
+        public float fuelPenalty;
     }
    
 

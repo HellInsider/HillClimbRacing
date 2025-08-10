@@ -14,7 +14,7 @@ public class CarDisplay : MonoBehaviour
         carName.text = car.carName;
         carDescription.text = car.carDescription;
         carImage.sprite = car.carImage;
-        carImage.color = Color.white; // Всегда отображаем в нормальном цвете
+        carImage.color = Color.white;
 
         selectButton.onClick.RemoveAllListeners();
         selectButton.onClick.AddListener(() => SelectCar(car));

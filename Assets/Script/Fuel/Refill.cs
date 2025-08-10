@@ -11,7 +11,7 @@ public class Refill : MonoBehaviour
             if (carFuelSystem != null)
             {
                 carFuelSystem.RefillFuel();
-                Debug.Log("Машина заправлена!");
+                Destroy(gameObject);
             }
         }
     }

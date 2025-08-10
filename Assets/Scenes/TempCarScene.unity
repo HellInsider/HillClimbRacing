@@ -1151,7 +1151,7 @@ MonoBehaviour:
   - {fileID: 2100681544}
   _centerOfMass: {fileID: 403232997}
   _maxFuel: 100
-  _Expenditure: 0
+  _Expenditure: 20
   _refillAmount: 50
   _currentMoney: 0
   _check: 1

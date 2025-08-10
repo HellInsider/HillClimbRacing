@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
             if (moneySystem != null)
             {
                 moneySystem.AddMoney(coinValue); 
-               // Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }
