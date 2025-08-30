@@ -11,7 +11,7 @@ public class MobInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void OnPointerUp(PointerEventData eventData)
-    {   
+    {
         _car.SetMoveInput(0f);
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e86c21dda66dc48bf75e867dc1b702, type: 3}
   m_Name: Car 2
   m_EditorClassIdentifier: 
-  carIndex: 1
+  carIndex: 0
   carName: Second
   carDescription: Better
-  carImage: {fileID: -1452844263595992844, guid: 5d2ed43ae2a0c264891a3a5a74316046, type: 3}
+  carImage: {fileID: -289698529998290892, guid: 27dde178fcfd6c949a71ec0ece9942c4, type: 3}
   carPrefab: {fileID: 1900368615144478857, guid: 705fed051c31f944487a24a5a29561a3, type: 3}

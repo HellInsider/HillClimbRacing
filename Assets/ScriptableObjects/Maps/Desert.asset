@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Desert
   m_EditorClassIdentifier: 
   mapIndex: 2
-  mapName: Desrt
+  mapName: Desert
   mapDescription: The same to the beach but without water
   mapImage: {fileID: 2933845435147071396, guid: 8180d8a5c19c9b54098fc9b05333d337, type: 3}
   sceneToLoad: {fileID: 0}

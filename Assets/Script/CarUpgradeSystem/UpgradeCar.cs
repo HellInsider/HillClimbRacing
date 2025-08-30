@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class UpgradeCar : MonoBehaviour
 {
-    public Car car;
+    [SerializeField] public Car car;
    
     [Header("Колеса")]
     [SerializeField] public float baseScale = 1.5f;
     [SerializeField] public float upgradeMultiplier = 1.2f;
     [SerializeField] public int maxUpgrades = 5;
-    [SerializeField] public bool affectPhysics = true;
     private WheelJoint2D[] wheelJoints;
     
     [Header("Топливо")]
@@ -22,14 +21,15 @@ public class UpgradeCar : MonoBehaviour
     [SerializeField] float TheMaximumSpeed;
 
     [Header("Гравитация")]
-    [SerializeField] public float baseGravity =100; 
-    [SerializeField] public float gravityReduction = 10f; 
+    [SerializeField] public float baseGravity = 100f;
+    [SerializeField] public float gravityReductionPercent = 70f; 
     [SerializeField] public float minGravityMultiplier = 0.1f; 
-    [SerializeField] public int maxGravityUpgrades = 5;
-    [SerializeField] public float gravityEffectDuration = 10f;
+    [SerializeField] public int maxGravityUpgrades = 5; 
+    [SerializeField] public float gravityEffectDuration = 10f; 
+    [SerializeField] public float gravityTransitionSpeed = 2f; 
+    [SerializeField] public float rechargeTime = 15f;
 
     [Header("Настройки щита")]
-    [SerializeField] private GameObject helmetPrefab;
     [SerializeField] private Transform helmetSocket;
     [SerializeField] private int shieldLevel = 0;
     [SerializeField] public HeadDeath head;
@@ -47,6 +47,13 @@ public class UpgradeCar : MonoBehaviour
     [SerializeField] private float gripStep = 1f;           
     [SerializeField] private float maxGripMultiplier = 3f;
 
+    private float currentGravityMultiplier = 1f;
+    private float targetGravityMultiplier = 1f;
+    private float previousGravityMultiplier = 1f;
+    private int gravityUpgradeCount = 0;
+    private bool isGravityEffectActive = false;
+    private float rechargeTimer = 0f;
+    private Rigidbody2D rb;
     private float currentGripMultiplier = 1f;
     private float timer;
     private bool DeadlyAcceleration;
@@ -57,17 +64,13 @@ public class UpgradeCar : MonoBehaviour
     private Transform centerOfMass;
     private int currentLevel = 0;
     private float percent;
-    private float currentGravityMultiplier =1f;
     private GameObject currentHelmet;
     private Vector3 deathPosition;
     private float tempSpeed;
-    private int gravityUpgradeCount = 0;
-    private float previousGravityMultiplier = 1f;
-    private bool isGravityEffectActive = false;
     private void Start()
     {
-        StartWheel();
         wheelJoints = car._wheelJoints;
+        //rb = car.rb;
         centerOfMass = car.centerOfMass;
         isShieldActive = false;
         DeadlyAcceleration = false;
@@ -75,11 +78,7 @@ public class UpgradeCar : MonoBehaviour
         //LoadShieldProgress();
         ApplyGripSettings();
         ResetGravity();
-    }
-   
-    public float UpdateVariable (float Variable, float Percent)
-    {
-        return (Variable * Percent)/100;
+        StartWheel();
     }
     public void StartWheel()
     {
@@ -91,7 +90,6 @@ public class UpgradeCar : MonoBehaviour
         if (timer > 0 && DeadlyAcceleration)
         {
             timer -= Time.deltaTime;
-            Debug.Log(timer);
         }
         else if (timer < 0)
         {
@@ -110,21 +108,20 @@ public class UpgradeCar : MonoBehaviour
 
         currentUpgrades++;
         currentScale *= upgradeMultiplier;
-
+        Debug.Log(currentScale);
         ApplyWheelScale();
         Debug.Log($"Улучшение колес (уровень {currentUpgrades}/{maxUpgrades})");
     }
     public void ApplyWheelScale()
     {
-        foreach (var wheel in wheelJoints)
+        foreach (WheelJoint2D wheel in wheelJoints)
         {
             if (wheel == null)
             {
+
                 continue;
             }
-
-            Transform wheelTransform = wheel.transform;
-            wheelTransform.localScale = Vector3.one * currentScale;
+            wheel.transform.localScale= Vector3.one* currentScale;
         }
     }
     public void ResetUpgrades()
@@ -156,7 +153,7 @@ public class UpgradeCar : MonoBehaviour
             Debug.Log(car._engineForce.ToString());
         }
     }
-    public void ApplyGravity()
+    /*public void ApplyGravity()
     {
        if (gravityUpgradeCount >= maxGravityUpgrades)
         {
@@ -184,6 +181,56 @@ public class UpgradeCar : MonoBehaviour
         Physics2D.gravity = new Vector2(0f, -baseGravity * currentGravityMultiplier);
         isGravityEffectActive = false;
         Debug.Log($"Гравитация восстановлена: {Physics2D.gravity.y} (Множитель: {currentGravityMultiplier})");
+    }*/
+    public void ApplyGravity()
+    {
+        if (gravityUpgradeCount >= maxGravityUpgrades)
+        {
+            Debug.Log("Достигнут максимум улучшений гравитации!");
+            return;
+        }
+        if (isGravityEffectActive || rechargeTimer > 0)
+        {
+            Debug.Log($"Эффект гравитации недоступен: активен={isGravityEffectActive}, перезарядка={rechargeTimer}");
+            return;
+        }
+
+        previousGravityMultiplier = currentGravityMultiplier;
+        targetGravityMultiplier = Mathf.Max(minGravityMultiplier, 1f - (gravityReductionPercent / 100f));
+        gravityUpgradeCount++;
+        isGravityEffectActive = true;
+        rechargeTimer = rechargeTime;
+
+        Debug.Log($"Гравитация уменьшена: начальное значение={currentGravityMultiplier}, целевое={targetGravityMultiplier}, уровень={gravityUpgradeCount}");
+        StartCoroutine(GravityEffectTransition());
+    }
+
+    private IEnumerator GravityEffectTransition()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < gravityEffectDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            currentGravityMultiplier = Mathf.Lerp(currentGravityMultiplier, targetGravityMultiplier, elapsedTime * gravityTransitionSpeed);
+            rb.gravityScale = currentGravityMultiplier;
+            Debug.Log($"Гравитация в процессе: {rb.gravityScale}");
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+        while (elapsedTime < gravityEffectDuration * 0.2f) 
+        {
+            elapsedTime += Time.deltaTime;
+            currentGravityMultiplier = Mathf.Lerp(targetGravityMultiplier, previousGravityMultiplier, elapsedTime * gravityTransitionSpeed);
+            rb.gravityScale = currentGravityMultiplier;
+            Debug.Log($"Гравитация возвращается: {rb.gravityScale}");
+            yield return null;
+        }
+
+        currentGravityMultiplier = previousGravityMultiplier;
+        rb.gravityScale = currentGravityMultiplier;
+        isGravityEffectActive = false;
+        Debug.Log($"Гравитация восстановлена: {rb.gravityScale}");
     }
     public void ResetGravity()
     {
@@ -194,6 +241,19 @@ public class UpgradeCar : MonoBehaviour
         Physics2D.gravity = new Vector2(0f, -baseGravity);
         StopAllCoroutines();
         Debug.Log($"Гравитация сброшена: {Physics2D.gravity.y}");
+       /* currentGravityMultiplier = 1f;
+        targetGravityMultiplier = 1f;
+        previousGravityMultiplier = 1f;
+        gravityUpgradeCount = 0;
+        isGravityEffectActive = false;
+        rechargeTimer = 0f;
+        if (rb != null) rb.gravityScale = currentGravityMultiplier;
+        StopAllCoroutines();
+        Debug.Log($"Гравитация сброшена: {rb?.gravityScale ?? 0f}");*/
+    }
+    public float UpdateVariable(float Variable, float Percent)
+    {
+        return (Variable * Percent) / 100;
     }
     public void ActivateShield()
     {
@@ -220,7 +280,10 @@ public class UpgradeCar : MonoBehaviour
     {
         foreach (var wheelJoint in wheelJoints)
         {
-            if (wheelJoints == null) return;
+            if (wheelJoints == null)
+            {
+                return;
+            }
             var suspension = wheelJoint.suspension;
             suspension.frequency = baseFrequency * currentGripMultiplier;
             wheelJoint.suspension = suspension;

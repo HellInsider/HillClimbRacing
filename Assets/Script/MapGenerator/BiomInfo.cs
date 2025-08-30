@@ -18,8 +18,10 @@ public class BiomInfo : ScriptableObject
         public float fuelSpacing;
         public float speedPenalty; 
         public float fuelPenalty;
+        public float addCoinSpacing;
+        public float addFuelSpacing;
     }
-   
-
-   
+    public EnvironmentSettings primarySettings;
+    public EnvironmentSettings citySettings;
+    public EnvironmentSettings desertSettings;
 }

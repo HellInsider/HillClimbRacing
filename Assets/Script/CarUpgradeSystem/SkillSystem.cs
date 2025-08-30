@@ -12,7 +12,7 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] skillNames; 
     [SerializeField] private TextMeshProUGUI[] skillDescriptions; 
     [Header("Настройки")]
-    [SerializeField] private float distanceThreshold = 5f; 
+    [SerializeField] private float distanceThreshold; 
     [SerializeField] private float initialDistance = 0f; 
     private float totalDistanceTraveled = 0f; 
     private Vector2 lastPosition; 
@@ -76,7 +76,7 @@ public class SkillSystem : MonoBehaviour
         Vector2 currentPosition = car.transform.position;
         float distanceThisFrame = Vector2.Distance(currentPosition, lastPosition);
         totalDistanceTraveled += distanceThisFrame;
-        LevelMenager.recordTrack += distanceThisFrame;
+        //LevelMenager.recordTrack += distanceThisFrame;
         lastPosition = currentPosition;
         if (totalDistanceTraveled >= distanceThreshold)
         {
@@ -154,6 +154,7 @@ public class SkillSystem : MonoBehaviour
                 break;
         }
         CloseSkillSelection();
+        distanceThreshold += 25f;
     }
 
     private void CloseSkillSelection()
