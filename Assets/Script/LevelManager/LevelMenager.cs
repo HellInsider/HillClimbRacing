@@ -116,7 +116,7 @@ public class LevelMenager : MonoBehaviour
         currentBiome.GenerateTerrain(terrainGenerator);
     }
 
-    /*private void SwitchEnvironment()
+    private void SwitchEnvironment()
     {
         
         if (terrainGenerator == null)
@@ -143,8 +143,8 @@ public class LevelMenager : MonoBehaviour
         }
         terrainGenerator.chunks.Clear();
         terrainGenerator.GenerateInitialChunks();
-    }*/
-    private void SwitchEnvironment()
+    }
+    /*private void SwitchEnvironment()
     {
         if (terrainGenerator == null)
         {
@@ -170,17 +170,16 @@ public class LevelMenager : MonoBehaviour
                 }
                 
             }
-            //Destroy(chunk);
+            Destroy(chunk);
         }
-
         currentBiome.OnEnter(car);
-    }
+    }*/
     public void Rollback()
     {
         car._engineForce = oldEngine;
         car._Expenditure = oldExpenditure;
     }
-    /*private void ApplyBiomePenalties(EnvironmentSettings settings)
+    private void ApplyBiomePenalties(EnvironmentSettings settings)
     {
         car._engineForce = oldEngine;
         car._Expenditure = oldExpenditure;
@@ -189,5 +188,5 @@ public class LevelMenager : MonoBehaviour
             car._engineForce -= settings.speedPenalty;
             car._Expenditure += settings.fuelPenalty;
         }
-    }*/
+    }
 }

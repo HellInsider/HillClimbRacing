@@ -41,6 +41,7 @@ public abstract class AbstractBiom
         generator.fuelSpacing += settings.fuelSpacing;
         generator.addCoinSpacing += settings.addCoinSpacing;
         generator.addFuelSpacing += settings.addFuelSpacing;
+        generator.canvasImage = settings.image;
     }
 
     public virtual void ApplyPenalties(Car player)

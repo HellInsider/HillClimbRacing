@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class TerrainGenerator : MonoBehaviour
     public Texture2D Texture;
     public Material undergroundMeshMaterial;
     public LineRenderer lineRenderer;
-
+    public Image image;
+    public Texture2D canvasImage;
+    
     public readonly List<GameObject> chunks = new List<GameObject>();
     private float lastX = 0;
     private float lastY = 0;
@@ -35,6 +38,12 @@ public class TerrainGenerator : MonoBehaviour
     [System.Obsolete]
     void Start()
     {
+        Sprite newSprite = Sprite.Create(
+               canvasImage,
+               new Rect(0, 0, canvasImage.width, canvasImage.height),
+               new Vector2(0.5f, 0.5f)
+           );
+        image.sprite = newSprite;
         seed = System.DateTime.Now.Millisecond;
         Random.InitState(seed);
         levelManager = FindObjectOfType<LevelMenager>();

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "BiomInfo", menuName = "Scriptable Objects/BiomInfo")]
 public class BiomInfo : ScriptableObject
@@ -20,6 +21,7 @@ public class BiomInfo : ScriptableObject
         public float fuelPenalty;
         public float addCoinSpacing;
         public float addFuelSpacing;
+        public Texture2D image;
     }
     public EnvironmentSettings primarySettings;
     public EnvironmentSettings citySettings;
