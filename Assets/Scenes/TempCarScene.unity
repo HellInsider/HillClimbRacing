@@ -1151,8 +1151,9 @@ MonoBehaviour:
   - {fileID: 2100681544}
   _centerOfMass: {fileID: 403232997}
   _maxFuel: 100
-  _Expenditure: 20
+  _Expenditure: 0
   _refillAmount: 50
+  gameOver: {fileID: 0}
   _currentMoney: 0
   _check: 1
   _isDead: 1
@@ -1173,7 +1174,6 @@ MonoBehaviour:
   baseScale: 1
   upgradeMultiplier: 1.2
   maxUpgrades: 5
-  affectPhysics: 0
   initialFuelBonus: 50
   speedPenaltyPerLevel: 10
   maxUpgradeLevel: 90
@@ -1183,7 +1183,6 @@ MonoBehaviour:
   minGravityMultiplier: 0.1
   maxGravityUpgrades: 5
   gravityEffectDuration: 10
-  helmetPrefab: {fileID: 0}
   helmetSocket: {fileID: 2043095296}
   shieldLevel: 1
   head: {fileID: 2043095297}
@@ -1201,7 +1200,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510916563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bd13efac7854d446b98c377b5c4d2d9, type: 3}
   m_Name: 
@@ -1223,6 +1222,7 @@ MonoBehaviour:
   - {fileID: 1908268320}
   distanceThreshold: 10
   initialDistance: 0
+  LevelMenager: {fileID: 0}
   availableSkills:
   - type: 0
     name: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
@@ -4620,6 +4620,7 @@ MonoBehaviour:
   pCar: {fileID: 510916567}
   playerRigidbody: {fileID: 510916566}
   upg: {fileID: 510916572}
+  gameOver: {fileID: 0}
 --- !u!70 &2043095298
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

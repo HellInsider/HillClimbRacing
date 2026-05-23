@@ -24,9 +24,13 @@ public class LevelMenager : MonoBehaviour
     [SerializeField] Car car;
     private float oldEngine;
     private float oldExpenditure;
+    private float lastXPosition = 0f;
+    //private EnvironmentType currentBiome;
+    private AbstractBiom currentBiome;
 
     void Start()
     {
+        terrain.NewStart();
         oldEngine = car._engineForce;
         oldExpenditure = car._Expenditure;
         if (terrainGenerator == null || player == null)
@@ -52,6 +56,7 @@ public class LevelMenager : MonoBehaviour
             SwitchEnvironment();
             lastTransitionX = player.position.x;
         }
+        CalculateDistance();
     }
 
     void InitializeObjectPool()
@@ -63,7 +68,22 @@ public class LevelMenager : MonoBehaviour
             objectPool.Enqueue(obj);
         }
     }
+    private void CalculateDistance()
+    {
+        float currentX = car.transform.position.x;
+        if (currentX > lastXPosition)
+        {
+            recordTrack += currentX - lastXPosition;
+            lastXPosition = currentX;
+        }
+        //Debug.Log($"Total Distance (LevelMenager): {recordTrack}, Current X: {currentX}, Last X: {lastXPosition}");
+        GetTotalDistance();
+    }
 
+    public float GetTotalDistance()
+    {
+        return recordTrack;
+    }
     public GameObject GetPooledObject()
     {
         if (objectPool.Count > 0)
@@ -84,21 +104,16 @@ public class LevelMenager : MonoBehaviour
         objectPool.Enqueue(obj);
     }
 
-    void SetEnvironment(EnvironmentType type)
+    private void SetEnvironment(EnvironmentType type)
     {
         currentEnvironment = type;
-        EnvironmentSettings settings = type == EnvironmentType.City ? citySettings : desertSettings;
-        if (terrainGenerator != null)
+        currentBiome = type switch
         {
-            terrainGenerator.perlinNoiseFrequency = settings.perlinNoiseFrequency;
-            terrainGenerator.heightVariation = settings.heightVariation;
-            terrainGenerator.mountainThreshold = settings.mountainThreshold;
-            terrainGenerator.smoothing = settings.smoothing;
-            terrainGenerator.Texture = settings.terrainTexture;
-            terrainGenerator.environmentObjectsSettings = settings.environmentObjects;
-            terrainGenerator.coinSpacing = settings.coinSpacing;
-            terrainGenerator.fuelSpacing = settings.fuelSpacing;
-        }
+            EnvironmentType.City => AbstractBiom.CreateCityBiome(citySettings),
+            EnvironmentType.Desert => AbstractBiom.CreateDesertBiome(desertSettings),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        currentBiome.GenerateTerrain(terrainGenerator);
     }
 
     private void SwitchEnvironment()
@@ -128,6 +143,41 @@ public class LevelMenager : MonoBehaviour
         }
         terrainGenerator.chunks.Clear();
         terrainGenerator.GenerateInitialChunks();
+    }
+    /*private void SwitchEnvironment()
+    {
+        if (terrainGenerator == null)
+        {
+            return;
+        }
+        currentBiome.OnExit(car); 
+
+        EnvironmentType newEnvironment = currentEnvironment == EnvironmentType.City ? EnvironmentType.Desert : EnvironmentType.City;
+        SetEnvironment(newEnvironment);
+
+       
+        List<GameObject> chunksToDestroy = new List<GameObject>(terrainGenerator.chunks);
+        terrainGenerator.chunks.Clear();
+        terrainGenerator.GenerateInitialChunks();
+
+        foreach (GameObject chunk in chunksToDestroy)
+        {
+            foreach (Transform child in chunk.transform)
+            {
+                if (child.gameObject.activeSelf && child.gameObject.name.StartsWith("PooledObject"))
+                {
+                    ReturnPooledObject(child.gameObject);
+                }
+                
+            }
+            Destroy(chunk);
+        }
+        currentBiome.OnEnter(car);
+    }*/
+    public void Rollback()
+    {
+        car._engineForce = oldEngine;
+        car._Expenditure = oldExpenditure;
     }
     private void ApplyBiomePenalties(EnvironmentSettings settings)
     {

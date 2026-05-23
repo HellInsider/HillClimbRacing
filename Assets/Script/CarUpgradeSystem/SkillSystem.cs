@@ -12,9 +12,9 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] skillNames; 
     [SerializeField] private TextMeshProUGUI[] skillDescriptions; 
     [Header("Настройки")]
-    [SerializeField] private float distanceThreshold = 5f; 
+    [SerializeField] private float distanceThreshold; 
     [SerializeField] private float initialDistance = 0f; 
-    private float totalDistanceTraveled = 0f; 
+    private float totalDistanceTraveled = 0; 
     private Vector2 lastPosition; 
     private bool isSkillSelectionActive = false;
     public LevelMenager LevelMenager;
@@ -57,7 +57,7 @@ public class SkillSystem : MonoBehaviour
             return;
         }
         lastPosition = car.transform.position;
-        totalDistanceTraveled = initialDistance;
+        totalDistanceTraveled = 0;
         if (skillSelectionCanvas != null)
         {
             skillSelectionCanvas.enabled = false;
@@ -74,14 +74,12 @@ public class SkillSystem : MonoBehaviour
             return;
         }
         Vector2 currentPosition = car.transform.position;
-        float distanceThisFrame = Vector2.Distance(currentPosition, lastPosition);
-        totalDistanceTraveled += distanceThisFrame;
-        LevelMenager.recordTrack += distanceThisFrame;
+        totalDistanceTraveled = LevelMenager.recordTrack;
+        //LevelMenager.recordTrack += distanceThisFrame;
         lastPosition = currentPosition;
-        if (totalDistanceTraveled >= distanceThreshold)
+        if ((int)totalDistanceTraveled == (int)distanceThreshold)
         {
             ShowSkillSelection();
-            totalDistanceTraveled = 0f; 
         }
     }
 
@@ -154,6 +152,7 @@ public class SkillSystem : MonoBehaviour
                 break;
         }
         CloseSkillSelection();
+        distanceThreshold += 25f;
     }
 
     private void CloseSkillSelection()

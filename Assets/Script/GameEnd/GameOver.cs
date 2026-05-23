@@ -7,6 +7,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] public Canvas GameOverPanelCanvas;
     [SerializeField] private TextMeshProUGUI TotalRoad;
     [SerializeField] private LevelMenager levelMenager;
+    [SerializeField] private Menu menu;
 
     public void Start()
     {
@@ -20,5 +21,6 @@ public class GameOver : MonoBehaviour
         GameOverPanelCanvas.enabled = true;
         GameOverPanel.SetActive(true);
         TotalRoad.text = "Total: " + ((int)levelMenager.recordTrack).ToString();
+        menu.isDead = false;
     }
 }

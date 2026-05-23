@@ -69,7 +69,6 @@ public class Car : MonoBehaviour, ICar
         StartMoveCar();
         StartMoney();
         StartFuel();
-        //StartWheel();
     }
     void Update()
     {
@@ -92,27 +91,21 @@ public class Car : MonoBehaviour, ICar
         {
             _rb.centerOfMass = _centerOfMass.localPosition;
         }
+        //_rb.mass *= 1.2f;
     }
     public void UpdateCarMove()
     {
         if (!_isMobileInput && _check)
         {
-            _moveInput = Input.GetAxis("Horizontal");
+            //_moveInput = Input.GetAxis("Horizontal");
         }
-        //if (_isMobileInput) FixedUpdate();
-
-
     }
     public void SetMoveInput(float input)
     {
-        _isMobileInput = true;
         _moveInput = Mathf.Clamp(input, -1f, 1f);
         _torqueInput = Mathf.Clamp(input, -0.3f, 0.3f);
-        if (input == 0)
-        {
-            _isMobileInput = false;
-        }
-        }
+        _isMobileInput = input != 0;
+    }
     public void FixUpdateMoveCar()
     {
         foreach (var wheelJoint in _wheelJoints)
@@ -124,12 +117,12 @@ public class Car : MonoBehaviour, ICar
                 motor.maxMotorTorque = 10000;
                 wheelJoint.motor = motor;
                 wheelJoint.useMotor = _moveInput != 0;
-                /*JointMotor2D motor = wheelJoint.motor;
-                motor.motorSpeed = Mathf.Lerp(
-                motor.motorSpeed,
-                _moveInput * _engineForce,
-                Time.fixedDeltaTime * (_moveInput != 0 ? _accelerationSpeed : _decelerationSpeed));*/
             }
+        }
+        if (_moveInput == 0)
+        {
+            _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, Time.fixedDeltaTime * 5f);
+            _rb.angularVelocity = Mathf.Lerp(_rb.angularVelocity, 0f, Time.fixedDeltaTime * 5f);
         }
         if (_rb.linearVelocity.magnitude > _maxSpeed)
         {
@@ -168,7 +161,7 @@ public class Car : MonoBehaviour, ICar
     public void StartFuel()
     {
         _currentFuel = _maxFuel;
-       
+
     }
     public void UpdateFuel()
     {
@@ -194,9 +187,6 @@ public class Car : MonoBehaviour, ICar
     public void OutOfFuel()
     {
         _isOutOfFuel = true;
-        Debug.Log("������� �����������!");
-        //StopCar();
-       // _engineForce = 0;
         _check = false;
         _isDead--;
         gameOver.GameOverPlayer();
@@ -207,7 +197,6 @@ public class Car : MonoBehaviour, ICar
         _currentFuel += _refillAmount;
         _currentFuel = Mathf.Min(_currentFuel, _maxFuel);
         _isOutOfFuel = false;
-        Debug.Log("����������! ������� �������: " + _currentFuel);
     }
     public float GetCurrentFuel()
     {
@@ -227,8 +216,6 @@ public class Car : MonoBehaviour, ICar
         if (amount < 0) return;
 
         _currentMoney += amount;
-        // _currentMoney = Mathf.Min(currentMoney, maxMoney);
-        Debug.Log($"��������� {amount} �����. ������� ������: {currentMoney}");
         UpdateMoneyUI();
     }
     public int GetCurrentMoney()
@@ -246,6 +233,6 @@ public class Car : MonoBehaviour, ICar
     }
     public bool IsGrounded()
     {
-        return true; // Ваша логика здесь
+        return true;
     }
 }

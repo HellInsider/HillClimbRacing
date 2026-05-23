@@ -44,7 +44,6 @@ public class UpgradeSystem : MonoBehaviour
                     if (car != null)
                     {
                         car.GetComponent<UpgradeCar>().UpgradeWheels();
-                        Debug.Log(DropDown);
                     }
                     break;
                 case myEnum.DeadlyAcceleration:

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class TerrainGenerator : MonoBehaviour
     public float undergroundDepth = 5f;
     public float coinSpacing = 10f;
     public float fuelSpacing = 25f;
+    public float addCoinSpacing;
+    public float addFuelSpacing;
     public GameObject coinPrefab;
     public GameObject fuelPrefab;
     public Transform player;
@@ -23,7 +26,9 @@ public class TerrainGenerator : MonoBehaviour
     public Texture2D Texture;
     public Material undergroundMeshMaterial;
     public LineRenderer lineRenderer;
-
+    public Image image;
+    public Texture2D canvasImage;
+    
     public readonly List<GameObject> chunks = new List<GameObject>();
     private float lastX = 0;
     private float lastY = 0;
@@ -31,15 +36,27 @@ public class TerrainGenerator : MonoBehaviour
     private float lastFuelX = 0f;
     private LevelMenager levelManager;
     [System.Obsolete]
-    private void Start()
+    void Start()
+    {
+        Sprite newSprite = Sprite.Create(
+               canvasImage,
+               new Rect(0, 0, canvasImage.width, canvasImage.height),
+               new Vector2(0.5f, 0.5f)
+           );
+        image.sprite = newSprite;
+        seed = System.DateTime.Now.Millisecond;
+        Random.InitState(seed);
+        levelManager = FindObjectOfType<LevelMenager>();
+        GenerateInitialChunks();
+    }
+    public void NewStart()
     {
         seed = System.DateTime.Now.Millisecond;
         Random.InitState(seed);
         levelManager = FindObjectOfType<LevelMenager>();
         GenerateInitialChunks();
     }
-
-    private void Update()
+    void Update()
     {
         if (player == null) return;
 
@@ -134,6 +151,7 @@ public class TerrainGenerator : MonoBehaviour
             {
                 GameObject coin = Instantiate(coinPrefab, new Vector3(x, y + 1f, 0), Quaternion.identity, chunk.transform);
                 lastCoinX = x;
+                coinSpacing += addCoinSpacing;
             }
 
             // Топливо
@@ -141,6 +159,7 @@ public class TerrainGenerator : MonoBehaviour
             {
                 GameObject fuel = Instantiate(fuelPrefab, new Vector3(x, y + 1f, 0), Quaternion.identity, chunk.transform);
                 lastFuelX = x;
+                fuelSpacing += addFuelSpacing;
             }
         }
 

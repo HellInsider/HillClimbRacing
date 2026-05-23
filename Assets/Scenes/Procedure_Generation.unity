@@ -717,7 +717,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129048891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3400}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1024,7 +1024,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 738377665}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1215,7 +1215,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228736178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3367}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2645,6 +2645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuPanel: {fileID: 176526454}
   pauseMenuPanelCanvas: {fileID: 176526457}
+  isDead: 1
 --- !u!114 &706623709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,7 +2672,7 @@ MonoBehaviour:
     coinSpacing: 0
     fuelSpacing: 0
     speedPenalty: 200
-    fuelPenalty: 20
+    fuelPenalty: 2
   desertSettings:
     perlinNoiseFrequency: 0
     heightVariation: 0
@@ -2682,7 +2683,7 @@ MonoBehaviour:
     coinSpacing: 0
     fuelSpacing: 0
     speedPenalty: 100
-    fuelPenalty: 10
+    fuelPenalty: 1
   player: {fileID: 105309291}
   transitionDistance: 10
   TotalRoad: {fileID: 1644741567}
@@ -2717,6 +2718,7 @@ MonoBehaviour:
   GameOverPanelCanvas: {fileID: 1382060107}
   TotalRoad: {fileID: 606166406}
   levelMenager: {fileID: 706623709}
+  menu: {fileID: 706623708}
 --- !u!1 &738377663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,7 +4312,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 738377665}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4801,7 +4803,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 738377665}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
